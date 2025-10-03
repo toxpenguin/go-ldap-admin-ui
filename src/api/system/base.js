@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-//用户登录（已完成）
+// User login (completed)
 export function login(data) {
   return request({
     url: '/api/base/login',
@@ -14,7 +14,7 @@ export function refreshToken() {
     method: 'post'
   })
 }
-//用户退出接口（已完成）
+// User exit interface (completed)
 export function logout() {
   return request({
     url: '/api/base/logout',

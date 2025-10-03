@@ -7,11 +7,11 @@
         :model="params"
         class="demo-form-inline"
       >
-        <el-form-item label="字段标识">
+        <el-form-item label="Field Identification">
           <el-input
             v-model.trim="params.remark"
             clearable
-            placeholder="描述"
+            placeholder="describe"
             @keyup.enter.native="search"
             @clear="search"
           />
@@ -22,7 +22,7 @@
             icon="el-icon-search"
             type="primary"
             @click="search"
-          >查询</el-button>
+          >Query</el-button>
         </el-form-item>
         <el-form-item>
           <el-button
@@ -30,7 +30,7 @@
             icon="el-icon-plus"
             type="warning"
             @click="create"
-          >新增</el-button>
+          >New</el-button>
         </el-form-item>
         <el-form-item>
           <el-button
@@ -39,7 +39,7 @@
             icon="el-icon-delete"
             type="danger"
             @click="batchDelete"
-          >批量删除</el-button>
+          >Batch Delete</el-button>
         </el-form-item>
         <br>
       </el-form>
@@ -61,21 +61,21 @@
           width="52"
           sortable
           prop="ID"
-          label="序号"
+          label="Serial number"
         />
         <el-table-column
           show-overflow-tooltip
           sortable
           prop="CreatedAt"
-          label="创建时间"
+          label="Creation time"
         />
         <el-table-column
           show-overflow-tooltip
           sortable
           prop="Flag"
-          label="字段标识"
+          label="Field Identification"
         />
-        <el-table-column show-overflow-tooltip sortable label="字段属性">
+        <el-table-column show-overflow-tooltip sortable label="Field properties">
           <template slot-scope="props">
             <el-form>
               <el-form-item>
@@ -86,7 +86,7 @@
         </el-table-column>
         <el-table-column fixed="right" label="操作" align="center" width="120">
           <template #default="scope">
-            <el-tooltip content="编辑" effect="dark" placement="top">
+            <el-tooltip content="edit" effect="dark" placement="top">
               <el-button
                 size="mini"
                 icon="el-icon-edit"
@@ -97,12 +97,12 @@
             </el-tooltip>
             <el-tooltip
               class="delete-popover"
-              content="删除"
+              content="delete"
               effect="dark"
               placement="top"
             >
               <el-popconfirm
-                title="确定删除吗？"
+                title="Are you sure to delete it?"
                 @onConfirm="singleDelete(scope.row.ID)"
               >
                 <el-button
@@ -118,10 +118,10 @@
         </el-table-column>
       </el-table>
 
-      <!-- 新增 -->
+      <!-- New -->
       <el-dialog :title="dialogFormTitle" :visible.sync="updateLoading">
         <div class="components-container">
-          <aside>动态关系管理说明文档参考： <a href="http://ldapdoc.eryajf.net/pages/84953d/" target="_blank">动态字段关系管理</a></aside>
+          <aside>Dynamic Relationship Management Document Reference: <a href="http://ldapdoc.eryajf.net/pages/84953d/" target="_blank">Dynamic field relationship management</a></aside>
         </div>
         <el-form
           ref="dialogForm"
@@ -130,7 +130,7 @@
           :rules="dialogFormRules"
           label-width="120px"
         >
-          <el-form-item label="类型">
+          <el-form-item label="type">
             <el-checkbox-group v-model="checked">
               <el-checkbox-button
                 v-for="city in cities"
@@ -143,11 +143,11 @@
             </el-checkbox-group>
           </el-form-item>
 
-          <template v-if="checked == '用户字段动态关联'">
-            <el-form-item label="类型标志">
+          <template v-if="checked == 'Dynamic correlation of user fields'">
+            <el-form-item label="Type flag">
               <el-select
                 v-model="userVal"
-                placeholder="请选择"
+                placeholder="Please select"
                 @change="changeUser(userVal)"
               >
                 <el-option
@@ -158,80 +158,80 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="用户名" prop="username">
+            <el-form-item label="username" prop="username">
               <el-input
                 v-model.trim="dialogFormData.username"
-                placeholder="用户名（拼音）"
+                placeholder="Username (Pinyin)"
               />
             </el-form-item>
-            <el-form-item label="中文名字" prop="nickname">
+            <el-form-item label="nickname" prop="nickname">
               <el-input
                 v-model.trim="dialogFormData.nickname"
-                placeholder="中文名字"
+                placeholder="Nickname"
               />
             </el-form-item>
-            <el-form-item label="花名" prop="givenName">
+            <el-form-item label="givenname" prop="givenName">
               <el-input
                 v-model.trim="dialogFormData.givenName"
-                placeholder="花名"
+                placeholder="Given name"
               />
             </el-form-item>
-            <el-form-item label="邮箱" prop="mail">
-              <el-input v-model.trim="dialogFormData.mail" placeholder="邮箱" />
+            <el-form-item label="Mail" prop="mail">
+              <el-input v-model.trim="dialogFormData.mail" placeholder="Mail" />
             </el-form-item>
-            <el-form-item label="工号" prop="jobNumber">
+            <el-form-item label="Work number" prop="jobNumber">
               <el-input
                 v-model.trim="dialogFormData.jobNumber"
-                placeholder="工号"
+                placeholder="Work number"
               />
             </el-form-item>
-            <el-form-item label="手机号" prop="mobile">
+            <el-form-item label="Phone number" prop="mobile">
               <el-input
                 v-model.trim="dialogFormData.mobile"
-                placeholder="手机号"
+                placeholder="Phone number"
               />
             </el-form-item>
-            <el-form-item label="头像" prop="avatar">
+            <el-form-item label="avatar" prop="avatar">
               <el-input
                 v-model.trim="dialogFormData.avatar"
-                placeholder="头像"
+                placeholder="avatar"
               />
             </el-form-item>
-            <el-form-item label="地址" prop="postalAddress">
+            <el-form-item label="address" prop="postalAddress">
               <el-input
                 v-model.trim="dialogFormData.postalAddress"
-                placeholder="地址"
+                placeholder="address"
               />
             </el-form-item>
-            <el-form-item label="职位" prop="position">
+            <el-form-item label="Position" prop="position">
               <el-input
                 v-model.trim="dialogFormData.position"
-                placeholder="职位"
+                placeholder="Position"
               />
             </el-form-item>
-            <el-form-item label="源用户ID" prop="sourceUserId">
+            <el-form-item label="Source User ID" prop="sourceUserId">
               <el-input
                 v-model.trim="dialogFormData.sourceUserId"
-                placeholder="源用户ID"
+                placeholder="Source User ID"
               />
             </el-form-item>
-            <el-form-item label="源用户唯一ID" prop="sourceUnionId">
+            <el-form-item label="Source user unique ID" prop="sourceUnionId">
               <el-input
                 v-model.trim="dialogFormData.sourceUnionId"
-                placeholder="源用户唯一ID"
+                placeholder="Source user unique ID"
               />
             </el-form-item>
-            <el-form-item label="说明" prop="introduction">
+            <el-form-item label="illustrate" prop="introduction">
               <el-input
                 v-model.trim="dialogFormData.introduction"
-                placeholder="说明"
+                placeholder="illustrate"
               />
             </el-form-item>
-            <!-- <el-form-item label="说明" prop="introduction">
+            <!-- <el-form-item label="illustrate" prop="introduction">
               <el-input
                 v-model.trim="dialogFormData.introduction"
                 type="textarea"
-                placeholder="说明"
+                placeholder="illustrate"
                 :autosize="{ minRows: 3, maxRows: 6 }"
                 show-word-limit
                 maxlength="100"
@@ -239,10 +239,10 @@
             </el-form-item> -->
           </template>
           <template v-else>
-            <el-form-item label="类型标志">
+            <el-form-item label="Type flag">
               <el-select
                 v-model="groupVal"
-                placeholder="请选择"
+                placeholder="Please select"
                 @change="changeGroup(groupVal)"
               >
                 <el-option
@@ -253,47 +253,47 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="分组名称" prop="groupName">
+            <el-form-item label="Group name" prop="groupName">
               <el-input
                 v-model.trim="dialogFormData.groupName"
-                placeholder="分组名称"
+                placeholder="Group name"
               />
             </el-form-item>
-            <el-form-item label="父部门ID" prop="sourceDeptParentId">
+            <el-form-item label="Parent Department ID" prop="sourceDeptParentId">
               <el-input
                 v-model.trim="dialogFormData.sourceDeptParentId"
-                placeholder="父部门ID"
+                placeholder="Parent Department ID"
               />
             </el-form-item>
-            <el-form-item label="部门ID" prop="sourceDeptId">
+            <el-form-item label="Department ID" prop="sourceDeptId">
               <el-input
                 v-model.trim="dialogFormData.sourceDeptId"
-                placeholder="部门ID"
+                placeholder="Department ID"
               />
             </el-form-item>
-            <el-form-item label="分组描述" prop="remark">
+            <el-form-item label="Group description" prop="remark">
               <el-input
                 v-model.trim="dialogFormData.remark"
-                placeholder="分组描述"
+                placeholder="Group description"
               />
             </el-form-item>
           </template>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button size="mini" @click="cancelForm()">取 消</el-button>
+          <el-button size="mini" @click="cancelForm()">Cancel</el-button>
           <el-button
             size="mini"
             :loading="submitLoading"
             type="primary"
             @click="submitForm('A')"
-          >确 定</el-button>
+          >Sure</el-button>
         </div>
       </el-dialog>
 
-      <!-- 编辑 -->
+      <!-- edit -->
       <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
         <div class="components-container">
-          <aside>动态关系管理说明文档参考： <a href="http://ldapdoc.eryajf.net/pages/84953d/" target="_blank">动态字段关系管理</a></aside>
+          <aside>Dynamic Relationship Management Document Reference: <a href="http://ldapdoc.eryajf.net/pages/84953d/" target="_blank">Dynamic field relationship management</a></aside>
         </div>
         <el-form
           ref="dialogForm"
@@ -302,15 +302,15 @@
           :rules="dialogFormRules"
           label-width="120px"
         >
-          <template v-if="checked == '用户字段动态关联'">
-            <el-form-item label="类型">
-              <el-button type="primary">用户字段动态关联</el-button>
+          <template v-if="checked == 'Dynamic correlation of user fields'">
+            <el-form-item label="type">
+              <el-button type="primary">Dynamic correlation of user fields</el-button>
             </el-form-item>
 
-            <el-form-item label="类型标志">
+            <el-form-item label="Type flag">
               <el-select
                 v-model="userVal"
-                placeholder="请选择"
+                placeholder="Please select"
                 @change="changeUser(userVal)"
               >
                 <el-option
@@ -321,84 +321,84 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="用户名" prop="username">
+            <el-form-item label="username" prop="username">
               <el-input
                 v-model.trim="dialogFormData.username"
-                placeholder="用户名"
+                placeholder="username"
               />
             </el-form-item>
-            <el-form-item label="中文名字" prop="nickname">
+            <el-form-item label="nickname" prop="nickname">
               <el-input
                 v-model.trim="dialogFormData.nickname"
-                placeholder="中文名字"
+                placeholder="Nickname"
               />
             </el-form-item>
-            <el-form-item label="花名" prop="givenName">
+            <el-form-item label="givenname" prop="givenName">
               <el-input
                 v-model.trim="dialogFormData.givenName"
-                placeholder="花名"
+                placeholder="Givenname"
               />
             </el-form-item>
-            <el-form-item label="邮箱" prop="mail">
-              <el-input v-model.trim="dialogFormData.mail" placeholder="邮箱" />
+            <el-form-item label="Mail" prop="mail">
+              <el-input v-model.trim="dialogFormData.mail" placeholder="Mail" />
             </el-form-item>
-            <el-form-item label="工号" prop="jobNumber">
+            <el-form-item label="Work number" prop="jobNumber">
               <el-input
                 v-model.trim="dialogFormData.jobNumber"
-                placeholder="工号"
+                placeholder="Work number"
               />
             </el-form-item>
-            <el-form-item label="手机号" prop="mobile">
+            <el-form-item label="Phone number" prop="mobile">
               <el-input
                 v-model.trim="dialogFormData.mobile"
-                placeholder="手机号"
+                placeholder="Phone number"
               />
             </el-form-item>
-            <el-form-item label="头像" prop="avatar">
+            <el-form-item label="avatar" prop="avatar">
               <el-input
                 v-model.trim="dialogFormData.avatar"
-                placeholder="头像"
+                placeholder="avatar"
               />
             </el-form-item>
-            <el-form-item label="地址" prop="postalAddress">
+            <el-form-item label="address" prop="postalAddress">
               <el-input
                 v-model.trim="dialogFormData.postalAddress"
-                placeholder="地址"
+                placeholder="address"
               />
             </el-form-item>
-            <el-form-item label="职位" prop="position">
+            <el-form-item label="Position" prop="position">
               <el-input
                 v-model.trim="dialogFormData.position"
-                placeholder="职位"
+                placeholder="Position"
               />
             </el-form-item>
-            <el-form-item label="源用户ID" prop="sourceUserId">
+            <el-form-item label="Source User ID" prop="sourceUserId">
               <el-input
                 v-model.trim="dialogFormData.sourceUserId"
-                placeholder="源用户ID"
+                placeholder="Source User ID"
               />
             </el-form-item>
-            <el-form-item label="源用户唯一ID" prop="sourceUnionId">
+            <el-form-item label="Source user unique ID" prop="sourceUnionId">
               <el-input
                 v-model.trim="dialogFormData.sourceUnionId"
-                placeholder="源用户唯一ID"
+                placeholder="Source user unique ID"
               />
             </el-form-item>
-            <el-form-item label="说明" prop="introduction">
+            <el-form-item label="illustrate" prop="introduction">
               <el-input
                 v-model.trim="dialogFormData.introduction"
-                placeholder="说明"
+                placeholder="illustrate"
               />
             </el-form-item>
           </template>
           <template v-else>
-            <el-form-item label="类型">
-              <el-button type="primary">分组字段动态关联</el-button>
+            <el-form-item label="type">
+              <el-button type="primary">Grouping fields dynamic association</el-button>
             </el-form-item>
-            <el-form-item label="类型标志">
+            <el-form-item label="Type flag">
               <el-select
                 v-model="groupVal"
-                placeholder="请选择"
+                placeholder="Please select"
                 @change="changeGroup(groupVal)"
               >
                 <el-option
@@ -409,28 +409,28 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="分组名称" prop="groupName">
+            <el-form-item label="Group name" prop="groupName">
               <el-input
                 v-model.trim="dialogFormData.groupName"
-                placeholder="分组名称"
+                placeholder="Group name"
               />
             </el-form-item>
-            <el-form-item label="父部门ID" prop="sourceDeptParentId">
+            <el-form-item label="Parent Department ID" prop="sourceDeptParentId">
               <el-input
                 v-model.trim="dialogFormData.sourceDeptParentId"
-                placeholder="父部门ID"
+                placeholder="Parent Department ID"
               />
             </el-form-item>
-            <el-form-item label="部门ID" prop="sourceDeptId">
+            <el-form-item label="Department ID" prop="sourceDeptId">
               <el-input
                 v-model.trim="dialogFormData.sourceDeptId"
-                placeholder="部门ID"
+                placeholder="Department ID"
               />
             </el-form-item>
-            <el-form-item label="分组描述" prop="remark">
+            <el-form-item label="Group description" prop="remark">
               <el-input
                 v-model.trim="dialogFormData.remark"
-                placeholder="分组描述"
+                placeholder="Group description"
               />
             </el-form-item>
           </template>
@@ -442,7 +442,7 @@
             :loading="submitLoading"
             type="primary"
             @click="submitForm('B')"
-          >确 定</el-button>
+          >Sure</el-button>
         </div>
       </el-dialog>
     </el-card>
@@ -460,7 +460,7 @@ import {
 } from '@/api/personnel/fieldRelation'
 import { Message } from 'element-ui'
 
-const cityOptions = ['用户字段动态关联', '分组字段动态关联']
+const cityOptions = ['User field dynamic association', 'Group field dynamic association']
 export default {
   name: 'FieldRelation',
   components: {
@@ -480,161 +480,161 @@ export default {
   data() {
     var checkPhone = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('手机号不能为空'))
+        return callback(new Error('Mobile phone number cannot be empty'))
       } else {
         const reg = /1\d{10}/
         if (reg.test(value)) {
           callback()
         } else {
-          return callback(new Error('请输入正确的手机号'))
+          return callback(new Error('Please enter the correct mobile phone number'))
         }
       }
     }
     return {
       options: [
-        { label: '飞书', value: 'feishu_group' },
-        { label: '钉钉', value: 'dingtalk_group' },
-        { label: '企业微信', value: 'wecom_group' }
+        { label: 'Feishu', value: 'feishu_group' },
+        { label: 'DigTalk', value: 'dingtalk_group' },
+        { label: 'WeChat', value: 'wecom_group' }
       ],
       userOptions: [
-        { label: '飞书', value: 'feishu_user' },
-        { label: '钉钉', value: 'dingtalk_user' },
-        { label: '企业微信', value: 'wecom_user' }
+        { label: 'Feishu', value: 'feishu_user' },
+        { label: 'DigTalk', value: 'dingtalk_user' },
+        { label: 'WeChat', value: 'wecom_user' }
       ],
       userVal: '',
       groupVal: '',
       updateId: '',
-      checked: ['用户字段动态关联'], // 新增数据默认选中
-      cities: cityOptions, // 新增默认选中
-      // 查询参数
+      checked: ['Dynamic correlation of user fields'], // New data is selected by default
+      cities: cityOptions, // Added default selected
+      // Query parameters
       params: {
         flag: '',
         pageNum: 1,
-        pageSize: 1000 // 平常百姓人家应该不会有这么多数据吧,后台限制最大单次获取1000条
+        pageSize: 1000 // Ordinary people shouldn't have so much data, the background limit is to obtain 1,000 pieces at a time.
       },
-      // 表格数据
+      // Tabular data
       tableData: [],
       infoTableData: [],
       total: 0,
       loading: false,
-      // 上级目录数据
+      // Previous directory data
       // treeselectData: [],
       // treeselectValue: 0,
-      updateLoading: false, // 新增
-      // dialog对话框
+      updateLoading: false, // New
+      // dialog dialog box
       submitLoading: false,
       dialogFormTitle: '',
       dialogType: '',
       dialogFormVisible: false,
       dialogFormData: {
-        username: '', // 用户名(通常为用户名拼音) name_pinyin
-        nickname: '', // 中文名字 name
-        givenName: '', // 花名 name
-        mail: '', // 邮箱 email
-        jobNumber: '', // 工号 job_number
-        mobile: '', // 手机号 mobile
-        avatar: '', // 头像 avatar
-        postalAddress: '', // 地址 work_place
-        position: '', // 职位 title
-        introduction: '', // 说明 remark
-        sourceUserId: '', // 源用户ID  userid
-        sourceUnionId: '', // 源用户唯一ID   unionid
-        groupName: '', // 分组名称（通常为分组名的拼音）
-        remark: '', // 分组描述
-        sourceDeptId: '', // 部门ID
-        sourceDeptParentId: '' // 父部门ID
+        username: '', // Username (usually in the pinyin of the username) name_pinyin
+        nickname: '', // Nickname name
+        givenName: '', // nickname name
+        mail: '', //Mail email
+        jobNumber: '', // Work number job_number
+        mobile: '', // Phone number mobile
+        avatar: '', // avatar avatar
+        postalAddress: '', // address work_place
+        position: '', // Position title
+        introduction: '', // illustrate remark
+        sourceUserId: '', // Source User ID  userid
+        sourceUnionId: '', // Source user unique ID   unionid
+        groupName: '', // Group name (usually the pinyin of the group name)
+        remark: '', // Group description
+        sourceDeptId: '', // Department ID
+        sourceDeptParentId: '' // Parent Department ID
       },
       //   dialogFromGroup: {
 
       //   },
       dialogFormRules: {
         sourceDeptParentId: [
-          { required: true, message: '请输入父部门ID', trigger: 'blur' },
-          { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter the parent department ID', trigger: 'blur' },
+          { min: 1, max: 50, message: 'Length from 1 to 50 characters', trigger: 'blur' }
         ],
         sourceDeptId: [
-          { required: true, message: '请输入部门ID', trigger: 'blur' },
-          { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter the department ID', trigger: 'blur' },
+          { min: 1, max: 50, message: 'Length from 1 to 50 characters', trigger: 'blur' }
         ],
         username: [
-          { required: true, message: '请输入类型标志', trigger: 'blur' },
-          { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter the type flag', trigger: 'blur' },
+          { min: 1, max: 50, message: 'Length from 1 to 50 characters', trigger: 'blur' }
         ],
         givenName: [
-          { required: true, message: '请输入所属类别', trigger: 'blur' },
-          { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter the category', trigger: 'blur' },
+          { min: 1, max: 50, message: 'Length from 1 to 50 characters', trigger: 'blur' }
         ],
         avatar: [
-          { required: true, message: '请输入所属类别', trigger: 'blur' },
-          { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter the category', trigger: 'blur' },
+          { min: 1, max: 50, message: 'Length from 1 to 50 characters', trigger: 'blur' }
         ],
         postalAddress: [
-          { required: true, message: '请输入所属类别', trigger: 'blur' },
-          { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter the category', trigger: 'blur' },
+          { min: 1, max: 50, message: 'Length from 1 to 50 characters', trigger: 'blur' }
         ],
         position: [
-          { required: true, message: '请输入所属类别', trigger: 'blur' },
-          { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter the category', trigger: 'blur' },
+          { min: 1, max: 50, message: 'Length from 1 to 50 characters', trigger: 'blur' }
         ],
         sourceUserId: [
-          { required: true, message: '请输入所属类别', trigger: 'blur' },
-          { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: ['blur', 'change'] }
+          { required: true, message: 'Please enter the category', trigger: 'blur' },
+          { min: 1, max: 50, message: 'Length from 1 to 50 characters', trigger: ['blur', 'change'] }
         ],
         sourceUnionId: [
-          { required: true, message: '请输入所属类别', trigger: 'blur' },
-          { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: ['blur', 'change'] }
+          { required: true, message: 'Please enter the category', trigger: 'blur' },
+          { min: 1, max: 50, message: 'Length from 1 to 50 characters', trigger: ['blur', 'change'] }
         ],
         groupName: [
-          { required: true, message: '请输入分组名称', trigger: 'blur' },
-          { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter a group name', trigger: 'blur' },
+          { min: 1, max: 50, message: 'Length from 1 to 50 characters', trigger: 'blur' }
         ],
         remark: [
-          { required: true, message: '请输入描述', trigger: 'blur' },
+          { required: true, message: 'Please enter a description', trigger: 'blur' },
           {
             min: 1,
             max: 50,
-            message: '长度在 1 到 50 个字符',
+            message: 'Length from 1 to 50 characters',
             trigger: 'blur'
           }
         ],
         // mail: [
-        //   { required: true, message: '请输入邮箱', trigger: 'blur' },
-        //   { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+        //   { required: true, message: 'Please enter your email address', trigger: 'blur' },
+        //   { type: 'email', message: 'Please enter the correct email address', trigger: ['blur', 'change'] }
         // ],
-         mail: [
-          { required: true, message: '请输入邮箱', trigger: 'blur' },
-          { min:1,max:50, message: '请输入邮箱地址', trigger: 'blur' }
+        mail: [
+          { required: true, message: 'Please enter your email address', trigger: 'blur' },
+          { min:1,max:50, message: 'Please enter your email address', trigger: 'blur' }
         ],
         jobNumber: [
-          { required: true, message: '请输入工号', trigger: 'blur' },
+          { required: true, message: 'Please enter the work number', trigger: 'blur' },
           {
             min: 0,
             max: 20,
-            message: '长度在 0 到 20 个字符',
+            message: 'Length between 0 and 20 characters',
             trigger: 'blur'
           }
         ],
         nickname: [
-          { required: true, message: '请输入昵称', trigger: 'blur' },
+          { required: true, message: 'Please enter a nickname', trigger: 'blur' },
           {
             min: 2,
             max: 20,
-            message: '长度在 2 到 20 个字符',
+            message: 'Length between 2 and 20 characters',
             trigger: 'blur'
           }
         ],
-        mobile: [{ required: true, message: '请输入手机号', trigger: 'blur'}],
+        mobile: [{ required: true, message: 'Please enter your mobile phone number', trigger: 'blur'}],
         introduction: [
-          { required: true, message: '说明', trigger: 'blur' },
+          { required: true, message: 'illustrate', trigger: 'blur' },
           {
             min: 0,
             max: 100,
-            message: '长度在 0 到 100 个字符',
+            message: 'Length between 0 and 100 characters',
             trigger: 'blur'
           }
         ]
       },
-      // 表格多选
+      // Multiple selection of forms
       multipleSelection: []
       // typeFlag:
     }
@@ -655,9 +655,9 @@ export default {
 
       this.groupVal = e
     },
-    // 查询
+    // Query
     search() {
-        // 初始化表格数据
+        // Initialize tabular data
         this.infoTableData = JSON.parse(JSON.stringify(this.tableData))
         this.infoTableData = this.deal(this.infoTableData, (node) =>
         node.Flag.includes(this.params.flag)
@@ -666,27 +666,27 @@ export default {
     resetData() {
       this.infoTableData = JSON.parse(JSON.stringify(this.tableData))
     },
-    // 页面数据过滤
+    // Page data filtering
     deal(nodes, predicate) {
-      // 如果已经没有节点了，结束递归
+      // If there are no nodes, end recursion
       if (!(nodes && nodes.length)) {
         return []
       }
       const newChildren = []
       for (const node of nodes) {
         if (predicate(node)) {
-          // 如果节点符合条件，直接加入新的节点集
+          // If the node meets the criteria, add a new node set directly
           newChildren.push(node)
           node.children = this.deal(node.children, predicate)
         } else {
-          // 如果当前节点不符合条件，递归过滤子节点，
-          // 把符合条件的子节点提升上来，并入新节点集
+          // If the current node does not meet the conditions, recursively filter the child nodes. 
+          // Raise the child nodes that meet the conditions and incorporate them into a new node set
           newChildren.push(...this.deal(node.children, predicate))
         }
       }
       return newChildren
     },
-    // 获取表格数据
+    // Get table data
     async getTableData() {
       this.loading = true
       try {
@@ -699,18 +699,18 @@ export default {
       }
     },
 
-    // 新增
+    // New
     create() {
-      this.checked = ['用户字段动态关联'];
+      this.checked = ['Dynamic correlation of user fields'];
       this.userVal = '',
       this.groupVal = '',
       this.dialogFormData = {},
       this.dialogFromGroup = {},
-      this.dialogFormTitle = '新增'
-      this.updateLoading = true // 新增的展示
+      this.dialogFormTitle = 'New'
+      this.updateLoading = true // New display
       this.dialogType = 'create'
     },
-    // 修改
+    // Revise
     update(row) {
 
       const typeDialog = row.Flag.split('_')[1]
@@ -736,44 +736,44 @@ export default {
 
       if (typeDialog === 'user') {
         this.updateId = row.ID
-        this.checked = ['用户字段动态关联'];
+        this.checked = ['Dynamic correlation of user fields'];
 
 
         this.userVal = row.Flag,
-        this.dialogFormData.username = username, // 用户名(通常为用户名拼音) name_pinyin
-        this.dialogFormData.nickname = nickname, // 中文名字 name
-        this.dialogFormData.givenName = givenName, // 花名 name
-        this.dialogFormData.mail = mail, // 邮箱 email
-        this.dialogFormData.jobNumber = jobNumber, // 工号 job_number
-        this.dialogFormData.mobile = mobile, // 手机号 mobile
-        this.dialogFormData.avatar = avatar, // 头像 avatar
-        this.dialogFormData.postalAddress = postalAddress, // 地址 work_place
-        this.dialogFormData.position = position, // 职位 title
-        this.dialogFormData.introduction = introduction, // 说明 remark
-        this.dialogFormData.sourceUserId = sourceUserId, // 源用户ID  userid
-        this.dialogFormData.sourceUnionId = sourceUnionId // 源用户唯一ID   unionid
+        this.dialogFormData.username = username, // Username (usually in the pinyin of the username) name_pinyin
+        this.dialogFormData.nickname = nickname, // Nickname name
+        this.dialogFormData.givenName = givenName, // Givenname name
+        this.dialogFormData.mail = mail, // Mail email
+        this.dialogFormData.jobNumber = jobNumber, // Work number job_number
+        this.dialogFormData.mobile = mobile, // Phone number mobile
+        this.dialogFormData.avatar = avatar, // avatar avatar
+        this.dialogFormData.postalAddress = postalAddress, // address work_place
+        this.dialogFormData.position = position, // Position title
+        this.dialogFormData.introduction = introduction, // illustrate remark
+        this.dialogFormData.sourceUserId = sourceUserId, // Source User ID userid
+        this.dialogFormData.sourceUnionId = sourceUnionId // Source user unique ID unionid
       } else {
         this.updateId = row.ID
-        this.checked = ['分组字段动态关联'];
+        this.checked = ['Grouping fields dynamic association'];
         this.groupVal = row.Flag
-        this.dialogFormData.groupName = groupName, // 分组名称（通常为分组名的拼音）
-        this.dialogFormData.remark = remark, // 分组描述
-        this.dialogFormData.sourceDeptId = sourceDeptId, // 部门ID
-        this.dialogFormData.sourceDeptParentId = sourceDeptParentId // 父部门ID
+        this.dialogFormData.groupName = groupName, // Group name (usually the pinyin of the group name)
+        this.dialogFormData.remark = remark, // Group description
+        this.dialogFormData.sourceDeptId = sourceDeptId, // Department ID
+        this.dialogFormData.sourceDeptParentId = sourceDeptParentId // Parent Department ID
       }
 
-      this.dialogFormTitle = '修改'
+      this.dialogFormTitle = 'Revise'
       this.dialogType = 'update'
       this.dialogFormVisible = true
     },
 
-    // 提交表单
+    // Submit a form
     submitForm(e) {
       let flag, attributes
-      if (this.checked[0] === '用户字段动态关联') {
+      if (this.checked[0] === 'Dynamic correlation of user fields') {
         if (this.userVal === '') {
           Message({
-            message: '请选择类型标志',
+            message: 'Please select the type flag',
             type: 'warning'
           })
           return false
@@ -783,7 +783,7 @@ export default {
       } else {
         if (this.groupVal === '') {
           Message({
-            message: '请选择类型标志',
+            message: 'Please select the type flag',
             type: 'warning'
           })
           return false
@@ -814,13 +814,13 @@ export default {
           this.getTableData()
           Message({
             showClose: true,
-            message: "操作成功",
+            message: "Operation is successful",
             type: 'success'
           })
         } else {
           Message({
             showClose: true,
-            message: '表单校验失败',
+            message: 'Form verification failed',
             type: 'warn'
           })
           return false
@@ -828,7 +828,7 @@ export default {
       })
     },
 
-    // 提交表单
+    // Submit a form
     cancelForm() {
       this.resetForm()
     },
@@ -843,11 +843,11 @@ export default {
       }
     },
 
-    // 批量删除
+    // Batch Delete
     batchDelete() {
-      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('This operation will be permanently deleted, will it continue?', 'Tip', {
+        confirmButtonText: 'Sure',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       })
         .then(async(res) => {
@@ -864,7 +864,7 @@ export default {
           this.getTableData()
           Message({
             showClose: true,
-            message: "删除成功",
+            message: "Delete successfully",
             type: 'success'
           })
         })
@@ -872,11 +872,11 @@ export default {
           Message({
             showClose: true,
             type: 'info',
-            message: '已取消删除'
+            message: 'Undelete'
           })
         })
     },
-    // 单个删除
+    // Single Delete
     async singleDelete(Id) {
       this.loading = true
       try {
@@ -887,12 +887,12 @@ export default {
       this.getTableData()
     },
 
-    // 表格多选
+    // Multiple selection of forms
     handleSelectionChange(val) {
       this.multipleSelection = val
     },
 
-    // 分页
+    // Pagination
     handleSizeChange(val) {
       this.params.pageSize = val
       this.getTableData()

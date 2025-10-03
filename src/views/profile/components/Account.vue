@@ -2,35 +2,35 @@
   <div>
     <el-card style="margin-bottom:20px;max-width: 580px;">
       <div slot="header" class="clearfix">
-        <span>修改账户密码</span>
+        <span>Change account password</span>
       </div>
 
       <el-form ref="dialogForm" size="small" :model="dialogFormData" :rules="dialogFormRules" label-width="100px">
 
-        <el-form-item label="原密码" prop="oldPassword">
-          <el-input v-model.trim="dialogFormData.oldPassword" autocomplete="on" :type="passwordTypeOld" placeholder="请输入原密码" />
+        <el-form-item label="Original password" prop="oldPassword">
+          <el-input v-model.trim="dialogFormData.oldPassword" autocomplete="on" :type="passwordTypeOld" placeholder="Please enter the original password" />
           <span class="show-pwd" @click="showPwdOld">
             <svg-icon :icon-class="passwordTypeOld === 'password' ? 'eye' : 'eye-open'" />
           </span>
         </el-form-item>
 
-        <el-form-item label="新密码" prop="newPassword">
-          <el-input v-model.trim="dialogFormData.newPassword" autocomplete="on" :type="passwordTypeNew" placeholder="请输入新密码" />
+        <el-form-item label="New Password" prop="newPassword">
+          <el-input v-model.trim="dialogFormData.newPassword" autocomplete="on" :type="passwordTypeNew" placeholder="Please enter a new password" />
           <span class="show-pwd" @click="showPwdNew">
             <svg-icon :icon-class="passwordTypeNew === 'password' ? 'eye' : 'eye-open'" />
           </span>
         </el-form-item>
 
-        <el-form-item label="确认密码" prop="confirmPassword">
-          <el-input v-model.trim="dialogFormData.confirmPassword" autocomplete="on" :type="passwordTypeConfirm" placeholder="请确认新密码" />
+        <el-form-item label="Confirm Password" prop="confirmPassword">
+          <el-input v-model.trim="dialogFormData.confirmPassword" autocomplete="on" :type="passwordTypeConfirm" placeholder="Please confirm the new password" />
           <span class="show-pwd" @click="showPwdConfirm">
             <svg-icon :icon-class="passwordTypeConfirm === 'password' ? 'eye' : 'eye-open'" />
           </span>
         </el-form-item>
 
         <el-form-item>
-          <el-button :loading="submitLoading" type="primary" @click="submitForm">确定</el-button>
-          <el-button @click="cancelForm">取消</el-button>
+          <el-button :loading="submitLoading" type="primary" @click="submitForm">Sure</el-button>
+          <el-button @click="cancelForm">Cancel</el-button>
         </el-form-item>
 
       </el-form>
@@ -49,12 +49,12 @@ export default {
     const confirmPass = (rule, value, callback) => {
       if (value) {
         if (this.dialogFormData.newPassword !== value) {
-          callback(new Error('两次输入的密码不一致'))
+          callback(new Error('The passwords entered twice are inconsistent'))
         } else {
           callback()
         }
       } else {
-        callback(new Error('请再次输入新密码'))
+        callback(new Error('Please enter the new password again'))
       }
     }
     return {
@@ -66,12 +66,12 @@ export default {
       },
       dialogFormRules: {
         oldPassword: [
-          { required: true, message: '请输入旧密码', trigger: 'blur' },
-          { min: 6, max: 30, message: '长度在 6 到 30 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter the old password', trigger: 'blur' },
+          { min: 6, max: 30, message: 'Length from 6 to 30 characters', trigger: 'blur' }
         ],
         newPassword: [
-          { required: true, message: '请输入新密码', trigger: 'blur' },
-          { min: 6, max: 30, message: '长度在 6 到 30 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter a new password', trigger: 'blur' },
+          { min: 6, max: 30, message: 'Length from 6 to 30 characters', trigger: 'blur' }
         ],
         confirmPassword: [
           { required: true, validator: confirmPass, trigger: 'blur' }
@@ -89,11 +89,11 @@ export default {
         if (valid) {
           this.dialogFormDataCopy = { ...this.dialogFormData }
 
-          // 密码RSA加密处理
+          // Password RSA encryption processing
           const encryptor = new JSEncrypt()
-          // 设置公钥
+          // Setting up the public key
           encryptor.setPublicKey(this.publicKey)
-          // 加密密码
+          // Encryption password
           const oldPasswd = encryptor.encrypt(this.dialogFormData.oldPassword)
           const newPasswd = encryptor.encrypt(this.dialogFormData.newPassword)
           const confirmPasswd = encryptor.encrypt(this.dialogFormData.confirmPassword)
@@ -115,19 +115,19 @@ export default {
           this.resetForm()
           Message({
             showClose: true,
-            message: '密码修改成功，请重新登录',
+            message: 'Password modification is successful, please log in again',
             type: 'success'
           })
-          // 重新登录
+          // Log in again
           setTimeout(() => {
             store.dispatch('user/logout').then(() => {
-              location.reload() // 为了重新实例化vue-router对象 避免bug
+              location.reload() // To re-instance the vue-router object avoid bugs
             })
           }, 1500)
         } else {
           this.$message({
             showClose: true,
-            message: '表单校验失败',
+            message: 'Form verification failed',
             type: 'warn'
           })
           return false

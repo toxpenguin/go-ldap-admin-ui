@@ -9,7 +9,7 @@ export const getRoutesFromMenuTree = (menuTree) => {
       menu.children = getRoutesFromMenuTree(menu.children)
     }
     // else {
-    //   // 这里需要清理children, 否则右侧会显示下拉图标
+    //   // Children need to be cleaned here, otherwise the drop-down icon will be displayed on the right side
     //   delete menu.children
     // }
     routes.push({
@@ -36,10 +36,10 @@ export const getRoutesFromMenuTree = (menuTree) => {
 
 export const loadComponent = (component) => {
   if (component === '' || component === 'Layout') {
-    // 组件不存在使用默认布局
+    // The component does not exist using the default layout
     return Layout
   }
-  // 动态获取组件
+  // Dynamically obtain components
   return (resolve) => require([`@/views${component}`], resolve)
 }
 
@@ -60,7 +60,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       let accessedRoutes = []
       const {id, roles}=userinfo
-      // 获取菜单树
+      // Get menu tree
       getUserMenuTreeByUserId({id: id}).then(res => {
 
         const { data } = res

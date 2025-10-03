@@ -1,8 +1,9 @@
+---
 workspace:
   launch:
     button:
-      name: 🛫 起飞
-      description: 💪 逐步迈向运维的四个现代化：规范化，标准化，高效化，优雅化
+      name: 🛫 take off
+      description: 💪 Gradually moving towards the four modernizations of operation and maintenance - standardization, standardization, efficiency and elegance
       hoverImage: .cnb/src/qifei.gif
     cpus: 8
     disabled: false
@@ -15,5 +16,5 @@ issue:
 
 fork:
   button:
-    description: 🫵 年轻人，你很眼光
+    description: 🫵 You are very sensible, young man
     hoverImage: ".cnb/src/trump.gif"

@@ -2,38 +2,38 @@
   <div>
     <el-card class="container-card" shadow="always">
       <el-form size="mini" :inline="true" :model="params" class="demo-form-inline">
-        <el-form-item label="请求人">
+        <el-form-item label="Requester">
           <el-input
             v-model.trim="params.username"
             clearable
-            placeholder="请求人"
+            placeholder="Requester"
             @keyup.enter.native="search"
             @clear="search"
           />
         </el-form-item>
-        <el-form-item label="IP地址">
-          <el-input v-model.trim="params.ip" clearable placeholder="IP地址" @keyup.enter.native="search" @clear="search" />
+        <el-form-item label="IP address">
+          <el-input v-model.trim="params.ip" clearable placeholder="IP address" @keyup.enter.native="search" @clear="search" />
         </el-form-item>
-        <el-form-item label="请求路径">
+        <el-form-item label="Request path">
           <el-input
             v-model.trim="params.path"
             clearable
-            placeholder="请求路径"
+            placeholder="Request path"
             @keyup.enter.native="search"
             @clear="search"
           />
         </el-form-item>
-        <el-form-item prop="method" label="请求方式">
-          <el-select v-model="params.method" placeholder="请选择请求状态" clearable @change="search" @clear="search">
+        <el-form-item prop="method" label="Request method">
+          <el-select v-model="params.method" placeholder="Please select the request status" clearable @change="search" @clear="search">
             <el-option v-for="item in RequestList" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
 
-        <el-form-item label="请求状态">
+        <el-form-item label="Request Status">
           <el-input
             v-model.trim="params.status"
             clearable
-            placeholder="请求状态"
+            placeholder="Request Status"
             @keyup.enter.native="search"
             @clear="search"
           />
@@ -48,10 +48,10 @@
             icon="el-icon-delete"
             type="danger"
             @click="batchDelete"
-          >批量删除</el-button>
+          >Batch Delete</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button type="danger" plain icon="el-icon-delete" size="mini" @click="handleClean">清空日志</el-button>
+          <el-button type="danger" plain icon="el-icon-delete" size="mini" @click="handleClean">Clear the log</el-button>
         </el-form-item>
       </el-form>
 
@@ -64,10 +64,10 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" align="center" />
-        <el-table-column show-overflow-tooltip sortable prop="username" label="请求人" />
-        <el-table-column show-overflow-tooltip sortable prop="ip" label="IP地址" />
-        <el-table-column show-overflow-tooltip sortable prop="path" label="请求路径" />
-        <el-table-column show-overflow-tooltip sortable prop="method" label="请求方式" align="center">
+        <el-table-column show-overflow-tooltip sortable prop="username" label="Requester" />
+        <el-table-column show-overflow-tooltip sortable prop="ip" label="IP address" />
+        <el-table-column show-overflow-tooltip sortable prop="path" label="Request path" />
+        <el-table-column show-overflow-tooltip sortable prop="method" label="Request method" align="center">
           <template slot-scope="scope">
             <el-tag v-if="scope.row.method === 'GET'" type="success">GET</el-tag>
             <el-tag v-else-if="scope.row.method === 'POST'" type="warning">POST</el-tag>
@@ -76,28 +76,28 @@
             <el-tag v-else type="info">{{ scope.row.method }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column show-overflow-tooltip sortable prop="status" label="请求状态" align="center">
+        <el-table-column show-overflow-tooltip sortable prop="status" label="Request Status" align="center">
           <template slot-scope="scope">
             <el-tag size="small" :type="scope.row.status | statusTagFilter" disable-transitions>{{ scope.row.status
             }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column show-overflow-tooltip sortable prop="startTime" label="发起时间">
+        <el-table-column show-overflow-tooltip sortable prop="startTime" label="Initiation time">
           <!-- <template slot-scope="scope">
             {{ parseGoTime(scope.row.startTime) }}
           </template> -->
         </el-table-column>
-        <el-table-column show-overflow-tooltip sortable prop="timeCost" label="请求耗时(ms)" align="center">
+        <el-table-column show-overflow-tooltip sortable prop="timeCost" label="Request time taken (ms)" align="center">
           <template slot-scope="scope">
             <el-tag size="small" :type="scope.row.timeCost | timeCostTagFilter" disable-transitions>{{ scope.row.timeCost
             }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column show-overflow-tooltip sortable prop="desc" label="说明" />
-        <el-table-column fixed="right" label="操作" align="center" width="80">
+        <el-table-column fixed="right" label="operate" align="center" width="80">
           <template slot-scope="scope">
-            <el-tooltip content="删除" effect="dark" placement="top">
-              <el-popconfirm title="确定删除吗？" @onConfirm="singleDelete(scope.row.ID)">
+            <el-tooltip content="delete" effect="dark" placement="top">
+              <el-popconfirm title="Are you sure to delete it?" @onConfirm="singleDelete(scope.row.ID)">
                 <el-button slot="reference" size="mini" icon="el-icon-delete" circle type="danger" />
               </el-popconfirm>
             </el-tooltip>
@@ -157,7 +157,7 @@ export default {
   },
   data() {
     return {
-      // 查询参数
+      // Query parameters
       params: {
         username: '',
         ip: '',
@@ -166,14 +166,14 @@ export default {
         pageNum: 1,
         pageSize: 10
       },
-      // 表格数据
+      // Tabular data
       tableData: [],
       total: 0,
       loading: false,
 
-      // 删除按钮弹出框
+      // Delete button pop-up box
       popoverVisible: false,
-      // 表格多选
+      // Multiple selection of forms
       multipleSelection: [],
       RequestList: [{
         value: 'GET',
@@ -195,13 +195,13 @@ export default {
   },
   methods: {
     parseGoTime,
-    // 查询
+    // Query
     search() {
       this.params.pageNum = 1
       this.getTableData()
     },
 
-    // 获取表格数据
+    // Get table data
     async getTableData() {
       this.loading = true
       try {
@@ -213,21 +213,21 @@ export default {
       }
     },
 
-    // 判断结果
+    // Judgment result
     judgeResult(res) {
       if (res.code === 0) {
         Message({
           showClose: true,
-          message: '操作成功',
+          message: 'Operation is successful',
           type: 'success'
         })
       }
     },
-    // 清空日志
+    // Clear the log
     handleClean() {
-      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('This operation will be permanently deleted, will it continue?', 'Tip', {
+        confirmButtonText: 'Sure',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(async res => {
         this.loading = true
@@ -243,16 +243,16 @@ export default {
         Message({
           showClose: true,
           type: 'info',
-          message: '已取消删除'
+          message: 'Undelete'
         })
       })
     },
 
-    // 批量删除
+    // Batch Delete
     batchDelete() {
-      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('This operation will be permanently deleted, will it continue?', 'Tip', {
+        confirmButtonText: 'Sure',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(async res => {
         this.loading = true
@@ -272,17 +272,17 @@ export default {
         Message({
           showClose: true,
           type: 'info',
-          message: '已取消删除'
+          message: 'Undelete'
         })
       })
     },
 
-    // 表格多选
+    // Multiple selection of forms
     handleSelectionChange(val) {
       this.multipleSelection = val
     },
 
-    // 单个删除
+    // Single Delete
     async singleDelete(Id) {
       this.loading = true
       try {
@@ -295,7 +295,7 @@ export default {
       this.getTableData()
     },
 
-    // 分页
+    // Pagination
     handleSizeChange(val) {
       this.params.pageSize = val
       this.getTableData()

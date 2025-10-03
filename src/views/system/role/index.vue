@@ -2,51 +2,51 @@
   <div>
     <el-card class="container-card" shadow="always">
       <el-form size="mini" :inline="true" :model="params" class="demo-form-inline">
-        <el-form-item label="角色名称">
-          <el-input v-model.trim="params.name" clearable placeholder="角色名称" @keyup.enter.native="search" @clear="search" />
+        <el-form-item label="Role name">
+          <el-input v-model.trim="params.name" clearable placeholder="Role name" @keyup.enter.native="search" @clear="search" />
         </el-form-item>
-        <el-form-item label="关键字">
-          <el-input v-model.trim="params.keyword" clearable placeholder="关键字" @keyup.enter.native="search" @clear="search" />
+        <el-form-item label="Keywords">
+          <el-input v-model.trim="params.keyword" clearable placeholder="Keywords" @keyup.enter.native="search" @clear="search" />
         </el-form-item>
-        <el-form-item label="角色状态">
-          <el-select v-model.trim="params.status" clearable placeholder="角色状态" @change="search" @clear="search">
-            <el-option label="正常" :value="1" />
-            <el-option label="禁用" :value="2" />
+        <el-form-item label="Role status">
+          <el-select v-model.trim="params.status" clearable placeholder="Role status" @change="search" @clear="search">
+            <el-option label="Normal" :value="1" />
+            <el-option label="Disabled" :value="2" />
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button :loading="loading" icon="el-icon-search" type="primary" @click="search">查询</el-button>
+          <el-button :loading="loading" icon="el-icon-search" type="primary" @click="search">Query</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button :loading="loading" icon="el-icon-plus" type="warning" @click="create">新增</el-button>
+          <el-button :loading="loading" icon="el-icon-plus" type="warning" @click="create">New</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button :disabled="multipleSelection.length === 0" :loading="loading" icon="el-icon-delete" type="danger" @click="batchDelete">批量删除</el-button>
+          <el-button :disabled="multipleSelection.length === 0" :loading="loading" icon="el-icon-delete" type="danger" @click="batchDelete">Batch Delete</el-button>
         </el-form-item>
       </el-form>
 
       <el-table v-loading="loading" :data="tableData" border stripe style="width: 100%" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center" />
-        <el-table-column show-overflow-tooltip sortable prop="name" label="角色名称" />
-        <el-table-column show-overflow-tooltip sortable prop="keyword" label="关键字" />
-        <el-table-column show-overflow-tooltip sortable prop="sort" label="等级" />
-        <el-table-column show-overflow-tooltip sortable prop="status" label="角色状态" align="center">
+        <el-table-column show-overflow-tooltip sortable prop="name" label="Role name" />
+        <el-table-column show-overflow-tooltip sortable prop="keyword" label="Keywords" />
+        <el-table-column show-overflow-tooltip sortable prop="sort" label="Grade" />
+        <el-table-column show-overflow-tooltip sortable prop="status" label="Role status" align="center">
           <template slot-scope="scope">
-            <el-tag size="small" :type="scope.row.status === 1 ? 'success':'danger'" disable-transitions>{{ scope.row.status === 1 ? '正常':'禁用' }}</el-tag>
+            <el-tag size="small" :type="scope.row.status === 1 ? 'success':'danger'" disable-transitions>{{ scope.row.status === 1 ? 'Normal':'Disable' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column show-overflow-tooltip sortable prop="creator" label="创建人" />
-        <el-table-column show-overflow-tooltip sortable prop="remark" label="说明" />
-        <el-table-column fixed="right" label="操作" align="center" width="140">
+        <el-table-column show-overflow-tooltip sortable prop="creator" label="Created by" />
+        <el-table-column show-overflow-tooltip sortable prop="remark" label="illustrate" />
+        <el-table-column fixed="right" label="operate" align="center" width="140">
           <template slot-scope="scope">
-            <el-tooltip content="编辑" effect="dark" placement="top">
+            <el-tooltip content="edit" effect="dark" placement="top">
               <el-button size="mini" icon="el-icon-edit" circle type="primary" @click="update(scope.row)" />
             </el-tooltip>
-            <el-tooltip content="权限" effect="dark" placement="top">
+            <el-tooltip content="Permissions" effect="dark" placement="top">
               <el-button size="mini" icon="el-icon-key" circle type="warning" @click="updatePermission(scope.row.ID)" />
             </el-tooltip>
-            <el-tooltip content="删除" effect="dark" placement="top">
-              <el-popconfirm style="margin-left:10px" title="确定删除吗？" @onConfirm="singleDelete(scope.row.ID)">
+            <el-tooltip content="delete" effect="dark" placement="top">
+              <el-popconfirm style="margin-left:10px" title="Are you sure to delete it? " @onConfirm="singleDelete(scope.row.ID)">
                 <el-button slot="reference" size="mini" icon="el-icon-delete" circle type="danger" />
               </el-popconfirm>
             </el-tooltip>
@@ -68,35 +68,35 @@
 
       <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible" width="580px">
         <el-form ref="dialogForm" :inline="true" size="small" :model="dialogFormData" :rules="dialogFormRules" label-width="100px">
-          <el-form-item label="角色名称" prop="name">
-            <el-input v-model.trim="dialogFormData.name" placeholder="角色名称" style="width: 420px" />
+          <el-form-item label="Role name" prop="name">
+            <el-input v-model.trim="dialogFormData.name" placeholder="Role name" style="width: 420px" />
           </el-form-item>
-          <el-form-item label="关键字" prop="keyword">
-            <el-input v-model.trim="dialogFormData.keyword" placeholder="关键字" style="width: 420px" />
+          <el-form-item label="Keywords" prop="keyword">
+            <el-input v-model.trim="dialogFormData.keyword" placeholder="Keywords" style="width: 420px" />
           </el-form-item>
-          <el-form-item label="角色状态" prop="status">
-            <el-select v-model.trim="dialogFormData.status" placeholder="请选择角色状态" style="width: 180px">
-              <el-option label="正常" :value="1" />
-              <el-option label="禁用" :value="2" />
+          <el-form-item label="Role status" prop="status">
+            <el-select v-model.trim="dialogFormData.status" placeholder="Please select the role status" style="width: 180px">
+              <el-option label="Normal" :value="1" />
+              <el-option label="Disabled" :value="2" />
             </el-select>
           </el-form-item>
-          <el-form-item label="等级(1最高)" prop="sort">
+          <el-form-item label="Level (1 highest)" prop="sort">
             <el-input-number v-model.number="dialogFormData.sort" controls-position="right" :min="1" :max="999" />
           </el-form-item>
-          <el-form-item label="说明" prop="remark">
-            <el-input v-model.trim="dialogFormData.remark" style="width: 420px" type="textarea" placeholder="说明" show-word-limit maxlength="100" />
+          <el-form-item label="illustrate" prop="remark">
+            <el-input v-model.trim="dialogFormData.remark" style="width: 420px" type="textarea" placeholder="illustrate" show-word-limit maxlength="100" />
           </el-form-item>
         </el-form>
         <div slot="footer">
-          <el-button size="mini" @click="cancelForm()">取 消</el-button>
-          <el-button size="mini" :loading="submitLoading" type="primary" @click="submitForm()">确 定</el-button>
+          <el-button size="mini" @click="cancelForm()">Cancel</el-button>
+          <el-button size="mini" :loading="submitLoading" type="primary" @click="submitForm()">Sure</el-button>
         </div>
       </el-dialog>
 
-      <el-dialog title="修改权限" :visible.sync="permsDialogVisible" width="580px" custom-class="perms-dialog">
+      <el-dialog title="Modify permissions" :visible.sync="permsDialogVisible" width="580px" custom-class="perms-dialog">
         <el-tabs>
           <el-tab-pane>
-            <span slot="label"><svg-icon icon-class="menu1" class-name="role-menu" /> 角色菜单</span>
+            <span slot="label"><svg-icon icon-class="menu1" class-name="role-menu" /> Role menu</span>
             <el-tree
               ref="roleMenuTree"
               v-loading="menuTreeLoading"
@@ -111,7 +111,7 @@
           </el-tab-pane>
 
           <el-tab-pane>
-            <span slot="label"><svg-icon icon-class="api1" class-name="role-menu" /> 角色接口</span>
+            <span slot="label"><svg-icon icon-class="api1" class-name="role-menu" /> Role Interface</span>
             <el-tree
               ref="roleApiTree"
               v-loading="apiTreeLoading"
@@ -125,8 +125,8 @@
           </el-tab-pane>
         </el-tabs>
         <div slot="footer">
-          <el-button size="mini" :loading="permissionLoading" @click="cancelPermissionForm()">取 消</el-button>
-          <el-button size="mini" type="primary" @click="submitPermissionForm()">确 定</el-button>
+          <el-button size="mini" :loading="permissionLoading" @click="cancelPermissionForm()">Cancel</el-button>
+          <el-button size="mini" type="primary" @click="submitPermissionForm()">Sure</el-button>
         </div>
       </el-dialog>
 
@@ -144,7 +144,7 @@ export default {
   name: 'Role',
   data() {
     return {
-      // 查询参数
+      // Query parameters
       params: {
         name: '',
         keyword: '',
@@ -152,12 +152,12 @@ export default {
         pageNum: 1,
         pageSize: 10
       },
-      // 表格数据
+      // Tabular data
       tableData: [],
       total: 0,
       loading: false,
 
-      // dialog对话框
+      // dialog dialog box
       submitLoading: false,
       dialogFormTitle: '',
       dialogType: '',
@@ -172,28 +172,28 @@ export default {
       },
       dialogFormRules: {
         name: [
-          { required: true, message: '请输入角色名称', trigger: 'blur' },
-          { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter the role name', trigger: 'blur' },
+          { min: 1, max: 20, message: 'Length from 1 to 20 characters', trigger: 'blur' }
         ],
         keyword: [
-          { required: true, message: '请输入关键字', trigger: 'blur' },
-          { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter keywords', trigger: 'blur' },
+          { min: 1, max: 20, message: 'Length from 1 to 20 characters', trigger: 'blur' }
         ],
         status: [
-          { required: true, message: '请选择角色状态', trigger: 'change' }
+          { required: true, message: 'Please select the role status', trigger: 'change' }
         ],
         remark: [
-          { required: false, message: '说明', trigger: 'blur' },
-          { min: 0, max: 100, message: '长度在 0 到 100 个字符', trigger: 'blur' }
+          { required: false, message: 'illustrate', trigger: 'blur' },
+          { min: 0, max: 100, message: 'Length between 0 and 100 characters', trigger: 'blur' }
         ]
       },
 
-      // 删除按钮弹出框
+      // Delete button pop-up box
       popoverVisible: false,
-      // 表格多选
+      // Multiple selection of forms
       multipleSelection: [],
 
-      // 修改权限
+      // Modify permissions
       permsDialogVisible: false,
       permissionLoading: false,
       menuTree: [],
@@ -201,7 +201,7 @@ export default {
       apiTree: [],
       defaultCheckedRoleApi: [],
 
-      // 被修改权限的角色ID
+      // Role ID with modified permissions
       roleId: 0
     }
   },
@@ -211,13 +211,13 @@ export default {
     this.getApiTree()
   },
   methods: {
-    // 查询
+    // Query
     search() {
       this.params.pageNum = 1
       this.getTableData()
     },
 
-    // 获取表格数据
+    // Get table data
     async getTableData() {
       this.loading = true
       try {
@@ -229,14 +229,14 @@ export default {
       }
     },
 
-    // 新增
+    // New
     create() {
-      this.dialogFormTitle = '新增角色'
+      this.dialogFormTitle = 'Added roles'
       this.dialogType = 'create'
       this.dialogFormVisible = true
     },
 
-    // 修改
+    // Revise
     update(row) {
       this.dialogFormData.ID = row.ID
       this.dialogFormData.name = row.name
@@ -245,23 +245,23 @@ export default {
       this.dialogFormData.status = row.status
       this.dialogFormData.remark = row.remark
 
-      this.dialogFormTitle = '修改角色'
+      this.dialogFormTitle = 'Modify roles'
       this.dialogType = 'update'
       this.dialogFormVisible = true
     },
 
-    // 判断结果
+    // Judgment result
     judgeResult(res){
       if (res.code==0){
           Message({
             showClose: true,
-            message: "操作成功",
+            message: "Operation is successful",
             type: 'success'
           })
         }
     },
 
-    // 提交表单
+    // Submit a form
     submitForm() {
       this.$refs['dialogForm'].validate(async valid => {
         if (valid) {
@@ -285,12 +285,12 @@ export default {
       })
     },
 
-    // 取消表单提交
+    // Cancel form submission
     cancelForm() {
       this.resetForm()
     },
 
-    // 重置表单
+    // Reset the form
     resetForm() {
       this.dialogFormVisible = false
       this.$refs['dialogForm'].resetFields()
@@ -303,11 +303,11 @@ export default {
       }
     },
 
-    // 批量删除
+    // Batch Delete
     batchDelete() {
-      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('This operation will be permanently deleted, will it continue?', 'Tip', {
+        confirmButtonText: 'Sure',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(async res => {
         this.loading = true
@@ -326,17 +326,17 @@ export default {
       }).catch(() => {
         Message({
           type: 'info',
-          message: '已取消删除'
+          message: 'Undelete'
         })
       })
     },
 
-    // 表格多选
+    // Multiple selection of forms
     handleSelectionChange(val) {
       this.multipleSelection = val
     },
 
-    // 单个删除
+    // Single Delete
     async singleDelete(id) {
       this.loading = true
       try {
@@ -349,7 +349,7 @@ export default {
       }
     },
 
-    // 修改权限按钮
+    // Modify permission button
     async updatePermission(roleId) {
       this.roleId = roleId
       this.permsDialogVisible = true
@@ -359,7 +359,7 @@ export default {
       this.getRoleApisById(roleId)
     },
 
-    // 获取菜单树
+    // Get menu tree
     async getMenuTree() {
       this.menuTreeLoading = true
       try {
@@ -370,7 +370,7 @@ export default {
       }
     },
 
-    // 获取接口树
+    // Get the interface tree
     async getApiTree() {
       this.apiTreeLoading = true
       try {
@@ -381,7 +381,7 @@ export default {
       }
     },
 
-    // 获取角色的权限菜单
+    // Get the permissions menu for the role
     async getRoleMenusById(roleId) {
       this.permissionLoading = true
       let rseData = []
@@ -401,7 +401,7 @@ export default {
       this.$refs.roleMenuTree.setCheckedKeys(this.defaultCheckedRoleMenu)
     },
 
-    // 获取角色的权限接口
+    // Get the permission interface for the role
     async getRoleApisById(roleId) {
       this.permissionLoading = true
       let resData = []
@@ -421,7 +421,7 @@ export default {
       this.$refs.roleApiTree.setCheckedKeys(this.defaultCheckedRoleApi)
     },
 
-    // 修改角色菜单
+    // Modify the role menu
     async updateRoleMenusById() {
       this.permissionLoading = true
       let ids = this.$refs.roleMenuTree.getCheckedKeys()
@@ -439,7 +439,7 @@ export default {
       this.permsDialogVisible = false
     },
 
-    // 修改角色接口
+    // Modify the role interface
     async updateRoleApisById() {
       this.permissionLoading = true
       const ids = this.$refs.roleApiTree.getCheckedKeys(true)
@@ -453,18 +453,18 @@ export default {
       this.permsDialogVisible = false
     },
 
-    // 确定修改角色权限
+    // Determine the permissions for modifying roles
     submitPermissionForm() {
       this.updateRoleMenusById()
       this.updateRoleApisById()
     },
 
-    // 取消修改角色权限
+    // Cancel the role modification permission
     cancelPermissionForm() {
       this.permsDialogVisible = false
     },
 
-    // 分页
+    // Pagination
     handleSizeChange(val) {
       this.params.pageSize = val
       this.getTableData()
@@ -494,4 +494,3 @@ export default {
     padding-bottom: 15px;
   }
 </style>
-

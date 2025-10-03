@@ -8,7 +8,7 @@
 [![HitCount](https://views.whatilearened.today/views/github/eryajf/go-ldap-admin-ui.svg)](https://github.com/eryajf/go-ldap-admin-ui)
 [![GitHub license](https://img.shields.io/github/license/eryajf/go-ldap-admin-ui)](https://github.com/eryajf/go-ldap-admin-ui/blob/main/LICENSE)
 
-<p> 🌉 基于Go+Vue实现的openLDAP后台管理项目 🌉</p>
+<p> 🌉 OpenLDAP backend management project based on Go+Vue implementation 🌉</p>
 
 <img src="https://cdn.jsdelivr.net/gh/eryajf/tu@main/img/image_20240420_214408.gif" width="800"  height="3">
 </div><br>
@@ -21,88 +21,88 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-**目录**
+**Table of contents**
 
-- [🏊 在线体验](#-%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C)
-- [👨‍💻 项目地址](#-%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80)
-- [🔗 文档快链](#-%E6%96%87%E6%A1%A3%E5%BF%AB%E9%93%BE)
-- [🥰 感谢](#-%E6%84%9F%E8%B0%A2)
-- [🤗 另外](#-%E5%8F%A6%E5%A4%96)
-- [⚡ 加群](#-%E5%8A%A0%E7%BE%A4)
-- [🤑 捐赠](#-%E6%8D%90%E8%B5%A0)
-- [📝 使用登记](#-%E4%BD%BF%E7%94%A8%E7%99%BB%E8%AE%B0)
-- [🤝 贡献者](#-%E8%B4%A1%E7%8C%AE%E8%80%85)
+- [🏊 Online experience](#oneline-experience)
+- [👨‍💻 Project gallery](#project-gallery)
+- [🔗 Documents](#documents)
+- [🥰 Grateful](#grateful)
+- [🤗 In addition](#in-addition)
+- [⚡  Join the group](#join-the-group)
+- [🤑 Donate](#donate)
+- [📝 Register for use](#register-for-use)
+- [🤝 Contributors](#contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
-## 🏊 在线体验
+## 🏊 Online experience
 
-提供在线体验地址如下：
+The online experience address is provided as follows: 
 
-- 地址：[http://61.171.114.86:8888](http://61.171.114.86:8888)
-- 登陆信息：admin/123456
+- Address: [http://61.171.114.86:8888](http://61.171.114.86:8888) 
+- Login information: admin/123456 
 
-> 在线环境可能不稳，如果遇到访问异常，或者数据错乱，请联系我进行修复。请勿填写个人敏感信息。
+> The online environment may be unstable. If you encounter access abnormalities or data confusing, please contact me to repair it. Please do not fill in personal sensitive information.
 
+**Page function overview:**
 
-**页面功能概览：**
-
-|    ![登录页](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_165411.png)    | ![首页](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_165545.png)     |
+|    ![Login page](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_165411.png)    | ![front page](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_165545.png)     |
 | :----------------------------------------------------------------------------------: | -------------------------------------------------------------------------------- |
-|   ![用户管理](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_165623.png)   | ![分组管理](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_165701.png) |
-| ![字段关系管理](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_165853.png) | ![菜单管理](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_165954.png) |
-|   ![接口管理](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_170015.png)   | ![操作日志](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_170035.png) |
+|   ![User Management](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_165623.png)   | ![Group management](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_165701.png) |
+| ![Field Relationship Management](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_165853.png) | ![Menu Management](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_165954.png) |
+|   ![Interface Management](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_170015.png)   | ![Operation log](https://cdn.jsdelivr.net/gh/eryajf/tu/img/image_20220724_170035.png) |
 
-## 👨‍💻 项目地址
+## 👨‍💻 Project gallery
 
-| 分类 |                     GitHub                     |                        Gitee                        |
+| Classification |                     GitHub                     |                        Gitee                        |
 | :--: | :--------------------------------------------: | :-------------------------------------------------: |
-| 后端 |  https://github.com/eryajf/go-ldap-admin.git   |  https://gitee.com/eryajf-world/go-ldap-admin.git   |
-| 前端 | https://github.com/eryajf/go-ldap-admin-ui.git | https://gitee.com/eryajf-world/go-ldap-admin-ui.git |
+| Backend |  https://github.com/eryajf/go-ldap-admin.git   |  https://gitee.com/eryajf-world/go-ldap-admin.git   |
+| Frontend | https://github.com/eryajf/go-ldap-admin-ui.git | https://gitee.com/eryajf-world/go-ldap-admin-ui.git |
 
-## 🔗 文档快链
+## 🔗 Documents
 
-项目相关介绍，使用，最佳实践等相关内容，都会在官方文档呈现，如有疑问，请先阅读官方文档，以下列举以下常用快链。
+Project-related introductions, usage, best practices and other related content will be presented in the official document. If you have any questions, please read the official document first. The following are listed as the following commonly used fast chains. 
 
-- [官网地址](http://ldapdoc.eryajf.net)
-- [项目背景](http://ldapdoc.eryajf.net/pages/101948/)
-- [快速开始](http://ldapdoc.eryajf.net/pages/706e78/)
-- [功能概览](http://ldapdoc.eryajf.net/pages/7a40de/)
-- [本地开发](http://ldapdoc.eryajf.net/pages/cb7497/)
-- [生产部署](http://ldapdoc.eryajf.net/pages/5769c4/)
+- [Official website address](http://ldapdoc.eryajf.net) 
+- [Project background](http://ldapdoc.eryajf.net/pages/101948/) 
+- [Quick Start](http://ldapdoc.eryajf.net/pages/706e78/) 
+- [Function Overview](http://ldapdoc.eryajf.net/pages/7a40de/) 
+- [Local Development](http://ldapdoc.eryajf.net/pages/cb7497/) 
+- [Production Deployment](http://ldapdoc.eryajf.net/pages/5769c4/)
 
-## 🥰 感谢
+## 🥰 Grateful
 
-感谢如下优秀的项目，没有这些项目，不可能会有 go-ldap-admin：
+Thanks to the following excellent projects, without which, it is impossible to have go-ldap-admin: 
 
-- 后端技术栈
-  - [Gin-v1.6.3](https://github.com/gin-gonic/gin)
-  - [Gorm-v1.20.12](https://github.com/go-gorm/gorm)
-  - [Go-ldap-v3.4.2](https://github.com/go-ldap/ldap)
-  - [Casbin-v2.22.0](https://github.com/casbin/casbin)
-- 前端技术栈
+- Backend Technology Stack 
+  - [Gin-v1.6.3](https://github.com/gin-gonic/gin) 
+  - [Gorm-v1.20.12](https://github.com/go-gorm/gorm) 
+  - [Go-ldap-v3.4.2](https://github.com/go-ldap/ldap) 
+  - [Casbin-v2.22.0](https://github.com/casbin/casbin) 
 
-  - [element-ui](https://github.com/ElemeFE/element)
-  - [axios](https://github.com/axios/axios)
+- Front-end technology stack 
 
-- 另外感谢
-  - [go-web-mini](https://github.com/gnimli/go-web-mini)：项目基于该项目重构而成，感谢作者的付出。
+  - [element-ui](https://github.com/ElemeFE/element) 
+  - [axios](https://github.com/axios/axios) 
 
-## 🤗 另外
+- Thanks in addition
+  - [go-web-mini](https://github.com/gnimli/go-web-mini): The project is based on the reconstruction of the project, thanks to the author for his efforts.
 
-- 如果觉得项目不错，麻烦动动小手点个 ⭐️star⭐️!
-- 如果你还有其他想法或者需求，欢迎在 issue 中交流！
+## 🤗 In addition
 
-## 🤑 捐赠
+- If you think the project is good, please click ⭐️star ⭐️! 
+- If you have other ideas or needs, please feel free to communicate in the issue!
 
-如果你觉得这个项目对你有帮助，你可以请作者喝杯咖啡 ☕️ [点我](http://ldapdoc.eryajf.net/pages/2b6725/)
+## 🤑 Donate
 
-## 📝 使用登记
+If you think this project is helpful to you, you can invite the author to have a cup of coffee ☕️ [Click me](http://ldapdoc.eryajf.net/pages/2b6725/)
 
-如果你所在公司使用了该项目，烦请在这里留下脚印，感谢支持 🥳 [点我](https://github.com/eryajf/go-ldap-admin/issues/18)
+## 📝 Register for use
 
-## 🤝 贡献者
+If your company uses this project, please leave your footprints here, thank you for your support 🥳 [Click me](https://github.com/eryajf/go-ldap-admin/issues/18)
+
+## 🤝 Contributors
 
 <!-- readme: collaborators,contributors -start -->
 <table>

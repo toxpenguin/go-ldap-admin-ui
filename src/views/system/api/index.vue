@@ -2,53 +2,53 @@
   <div>
     <el-card class="container-card" shadow="always">
       <el-form size="mini" :inline="true" :model="params" class="demo-form-inline">
-        <el-form-item label="访问路径">
-          <el-input v-model.trim="params.path" clearable placeholder="访问路径" @keyup.enter.native="search" @clear="search" />
+        <el-form-item label="Access path">
+          <el-input v-model.trim="params.path" clearable placeholder="Access path" @keyup.enter.native="search" @clear="search" />
         </el-form-item>
-        <el-form-item label="所属类别">
-          <el-input v-model.trim="params.category" clearable placeholder="所属类别" @keyup.enter.native="search" @clear="search" />
+        <el-form-item label="Category">
+          <el-input v-model.trim="params.category" clearable placeholder="Category" @keyup.enter.native="search" @clear="search" />
         </el-form-item>
-        <el-form-item label="请求方法">
-          <el-select v-model.trim="params.method" clearable placeholder="请求方式" @change="search" @clear="search">
-            <el-option label="GET[获取资源]" value="GET" />
-            <el-option label="POST[新增资源]" value="POST" />
-            <el-option label="PUT[全部更新]" value="PUT" />
-            <el-option label="PATCH[增量更新]" value="PATCH" />
-            <el-option label="DELETE[删除资源]" value="DELETE" />
+        <el-form-item label="Request method">
+          <el-select v-model.trim="params.method" clearable placeholder="Request method" @change="search" @clear="search">
+            <el-option label="GET [Get resources]" value="GET" />
+            <el-option label="POST [New Resources]" value="POST" />
+            <el-option label="PUT [Updated all]" value="PUT" />
+            <el-option label="PATCH [Incremental Update]" value="PATCH" />
+            <el-option label="DELETE [Delete Resource]" value="DELETE" />
           </el-select>
         </el-form-item>
-        <el-form-item label="创建人">
-          <el-input v-model.trim="params.creator" clearable placeholder="创建人" @keyup.enter.native="search" @clear="search" />
+        <el-form-item label="Created by">
+          <el-input v-model.trim="params.creator" clearable placeholder="Created by" @keyup.enter.native="search" @clear="search" />
         </el-form-item>
         <el-form-item>
-          <el-button :loading="loading" icon="el-icon-search" type="primary" @click="search">查询</el-button>
+          <el-button :loading="loading" icon="el-icon-search" type="primary" @click="search">Query</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button :loading="loading" icon="el-icon-plus" type="warning" @click="create">新增</el-button>
+          <el-button :loading="loading" icon="el-icon-plus" type="warning" @click="create">New</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button :disabled="multipleSelection.length === 0" :loading="loading" icon="el-icon-delete" type="danger" @click="batchDelete">批量删除</el-button>
+          <el-button :disabled="multipleSelection.length === 0" :loading="loading" icon="el-icon-delete" type="danger" @click="batchDelete">Batch Delete</el-button>
         </el-form-item>
       </el-form>
 
       <el-table v-loading="loading" :data="tableData" border stripe style="width: 100%" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center" />
-        <el-table-column show-overflow-tooltip sortable prop="path" label="访问路径" />
-        <el-table-column show-overflow-tooltip sortable prop="category" label="所属类别" />
-        <el-table-column show-overflow-tooltip sortable prop="method" label="请求方式" align="center">
+        <el-table-column show-overflow-tooltip sortable prop="path" label="Access path" />
+        <el-table-column show-overflow-tooltip sortable prop="category" label="Category" />
+        <el-table-column show-overflow-tooltip sortable prop="method" label="Request method" align="center">
           <template slot-scope="scope">
             <el-tag size="small" :type="scope.row.method | methodTagFilter" disable-transitions>{{ scope.row.method }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column show-overflow-tooltip sortable prop="creator" label="创建人" />
-        <el-table-column show-overflow-tooltip sortable prop="remark" label="说明" />
-        <el-table-column fixed="right" label="操作" align="center" width="120">
+        <el-table-column show-overflow-tooltip sortable prop="creator" label="Created by" />
+        <el-table-column show-overflow-tooltip sortable prop="remark" label="illustrate" />
+        <el-table-column fixed="right" label="operate" align="center" width="120">
           <template slot-scope="scope">
-            <el-tooltip content="编辑" effect="dark" placement="top">
+            <el-tooltip content="edit" effect="dark" placement="top">
               <el-button size="mini" icon="el-icon-edit" circle type="primary" @click="update(scope.row)" />
             </el-tooltip>
-            <el-tooltip class="delete-popover" content="删除" effect="dark" placement="top">
-              <el-popconfirm title="确定删除吗？" @onConfirm="singleDelete(scope.row.ID)">
+            <el-tooltip class="delete-popover" content="delete" effect="dark" placement="top">
+              <el-popconfirm title="Are you sure to delete it? " @onConfirm="singleDelete(scope.row.ID)">
                 <el-button slot="reference" size="mini" icon="el-icon-delete" circle type="danger" />
               </el-popconfirm>
             </el-tooltip>
@@ -70,28 +70,28 @@
 
       <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
         <el-form ref="dialogForm" size="small" :model="dialogFormData" :rules="dialogFormRules" label-width="120px">
-          <el-form-item label="访问路径" prop="path">
-            <el-input v-model.trim="dialogFormData.path" placeholder="访问路径" />
+          <el-form-item label="Access path" prop="path">
+            <el-input v-model.trim="dialogFormData.path" placeholder="Access path" />
           </el-form-item>
-          <el-form-item label="所属类别" prop="category">
-            <el-input v-model.trim="dialogFormData.category" placeholder="所属类别" />
+          <el-form-item label="Category" prop="category">
+            <el-input v-model.trim="dialogFormData.category" placeholder="Category" />
           </el-form-item>
-          <el-form-item label="请求方式" prop="method">
-            <el-select v-model.trim="dialogFormData.method" placeholder="请选择请求方式">
-              <el-option label="GET[获取资源]" value="GET" />
-              <el-option label="POST[新增资源]" value="POST" />
-              <el-option label="PUT[全部更新]" value="PUT" />
-              <el-option label="PATCH[增量更新]" value="PATCH" />
-              <el-option label="DELETE[删除资源]" value="DELETE" />
+          <el-form-item label="Request method" prop="method">
+            <el-select v-model.trim="dialogFormData.method" placeholder="Please select the request method">
+              <el-option label="GET [Get resources]" value="GET" />
+              <el-option label="POST [New Resources]" value="POST" />
+              <el-option label="PUT [Updated all]" value="PUT" />
+              <el-option label="PATCH [Incremental Update]" value="PATCH" />
+              <el-option label="DELETE [Delete Resource]" value="DELETE" />
             </el-select>
           </el-form-item>
-          <el-form-item label="说明" prop="remark">
-            <el-input v-model.trim="dialogFormData.remark" type="textarea" placeholder="说明" show-word-limit maxlength="100" />
+          <el-form-item label="illustrate" prop="remark">
+            <el-input v-model.trim="dialogFormData.remark" type="textarea" placeholder="illustrate" show-word-limit maxlength="100" />
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button size="mini" @click="cancelForm()">取 消</el-button>
-          <el-button size="mini" :loading="submitLoading" type="primary" @click="submitForm()">确 定</el-button>
+          <el-button size="mini" @click="cancelForm()">Cancel</el-button>
+          <el-button size="mini" :loading="submitLoading" type="primary" @click="submitForm()">Sure</el-button>
         </div>
       </el-dialog>
 
@@ -124,7 +124,7 @@ export default {
   },
   data() {
     return {
-      // 查询参数
+      // Query parameters
       params: {
         path: '',
         method: '',
@@ -133,12 +133,12 @@ export default {
         pageNum: 1,
         pageSize: 10
       },
-      // 表格数据
+      // Tabular data
       tableData: [],
       total: 0,
       loading: false,
 
-      // dialog对话框
+      // dialog dialog box
       submitLoading: false,
       dialogFormTitle: '',
       dialogType: '',
@@ -152,25 +152,25 @@ export default {
       },
       dialogFormRules: {
         path: [
-          { required: true, message: '请输入访问路径', trigger: 'blur' },
-          { min: 1, max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter the access path', trigger: 'blur' },
+          { min: 1, max: 100, message: 'Length from 1 to 100 characters', trigger: 'blur' }
         ],
         category: [
-          { required: true, message: '请输入所属类别', trigger: 'blur' },
-          { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter the category', trigger: 'blur' },
+          { min: 1, max: 50, message: 'Length from 1 to 50 characters', trigger: 'blur' }
         ],
         method: [
-          { required: true, message: '请选择请求方式', trigger: 'change' }
+          { required: true, message: 'Please select the request method', trigger: 'change' }
         ],
         remark: [
-          { required: false, message: '说明', trigger: 'blur' },
-          { min: 0, max: 100, message: '长度在 0 到 100 个字符', trigger: 'blur' }
+          { required: false, message: 'illustrate', trigger: 'blur' },
+          { min: 0, max: 100, message: 'Length between 0 and 100 characters', trigger: 'blur' }
         ]
       },
 
-      // 删除按钮弹出框
+      // Delete button pop-up box
       popoverVisible: false,
-      // 表格多选
+      // Multiple selection of forms
       multipleSelection: []
     }
   },
@@ -178,13 +178,13 @@ export default {
     this.getTableData()
   },
   methods: {
-    // 查询
+    // Query
     search() {
       this.params.pageNum = 1
       this.getTableData()
     },
 
-    // 获取表格数据
+    // Get table data
     async getTableData() {
       this.loading = true
       try {
@@ -196,14 +196,14 @@ export default {
       }
     },
 
-    // 新增
+    // New
     create() {
-      this.dialogFormTitle = '新增接口'
+      this.dialogFormTitle = 'Added interface'
       this.dialogType = 'create'
       this.dialogFormVisible = true
     },
 
-    // 修改
+    // Revise
     update(row) {
       this.dialogFormData.ID = row.ID
       this.dialogFormData.path = row.path
@@ -211,23 +211,23 @@ export default {
       this.dialogFormData.method = row.method
       this.dialogFormData.remark = row.remark
 
-      this.dialogFormTitle = '修改接口'
+      this.dialogFormTitle = 'Modify the interface'
       this.dialogType = 'update'
       this.dialogFormVisible = true
     },
 
-    // 判断结果
+    // Judgment result
     judgeResult(res){
       if (res.code==0){
           Message({
             showClose: true,
-            message: "操作成功",
+            message: "Operation is successful",
             type: 'success'
           })
         }
     },
 
-    // 提交表单
+    // Submit a form
     submitForm() {
       this.$refs['dialogForm'].validate(async valid => {
         if (valid) {
@@ -250,7 +250,7 @@ export default {
         } else {
           Message({
             showClose: true,
-            message: '表单校验失败',
+            message: 'Form verification failed',
             type: 'warn'
           })
           return false
@@ -258,7 +258,7 @@ export default {
       })
     },
 
-    // 提交表单
+    // Submit a form
     cancelForm() {
       this.resetForm()
     },
@@ -275,11 +275,11 @@ export default {
       }
     },
 
-    // 批量删除
+    // Batch Delete
     batchDelete() {
-      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('This operation will be permanently deleted, will it continue?', 'Tip', {
+        confirmButtonText: 'Sure',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(async res => {
         this.loading = true
@@ -299,17 +299,17 @@ export default {
         Message({
           showClose: true,
           type: 'info',
-          message: '已取消删除'
+          message: 'Undelete'
         })
       })
     },
 
-    // 表格多选
+    // Multiple selection of forms
     handleSelectionChange(val) {
       this.multipleSelection = val
     },
 
-    // 单个删除
+    // Single Delete
     async singleDelete(Id) {
       this.loading = true
       try {
@@ -322,7 +322,7 @@ export default {
       this.getTableData()
     },
 
-    // 分页
+    // Pagination
     handleSizeChange(val) {
       this.params.pageSize = val
       this.getTableData()

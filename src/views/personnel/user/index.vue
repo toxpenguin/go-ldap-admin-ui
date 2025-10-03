@@ -2,94 +2,94 @@
   <div>
     <el-card class="container-card" shadow="always">
       <el-form size="mini" :inline="true" :model="params" class="demo-form-inline">
-        <el-form-item label="用户名">
-          <el-input v-model.trim="params.username" style="width: 100px;" clearable placeholder="用户名" @keyup.enter.native="search" @clear="search" />
+        <el-form-item label="username">
+          <el-input v-model.trim="params.username" style="width: 100px;" clearable placeholder="username" @keyup.enter.native="search" @clear="search" />
         </el-form-item>
-        <el-form-item label="昵称">
-          <el-input v-model.trim="params.nickname" style="width: 100px;" clearable placeholder="昵称" @keyup.enter.native="search" @clear="search" />
+        <el-form-item label="Nick name">
+          <el-input v-model.trim="params.nickname" style="width: 100px;" clearable placeholder="Nick name" @keyup.enter.native="search" @clear="search" />
         </el-form-item>
-        <el-form-item label="状态">
-          <el-select v-model.trim="params.status" style="width: 100px;" clearable placeholder="状态" @change="search" @clear="search">
-            <el-option label="正常" value="1" />
-            <el-option label="禁用" value="2" />
+        <el-form-item label="state">
+          <el-select v-model.trim="params.status" style="width: 100px;" clearable placeholder="state" @change="search" @clear="search">
+            <el-option label="Normal" value="1" />
+            <el-option label="Disabled" value="2" />
           </el-select>
         </el-form-item>
-        <el-form-item label="同步状态">
-          <el-select v-model.trim="params.syncState" style="width: 100px;" clearable placeholder="同步状态" @change="search" @clear="search">
-            <el-option label="已同步" value="1" />
-            <el-option label="未同步" value="2" />
+        <el-form-item label="Synchronous status">
+          <el-select v-model.trim="params.syncState" style="width: 100px;" clearable placeholder="Synchronous status" @change="search" @clear="search">
+            <el-option label="Synchronized" value="1" />
+            <el-option label="Not synchronized" value="2" />
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button :loading="loading" icon="el-icon-search" type="primary" @click="search">查询</el-button>
+          <el-button :loading="loading" icon="el-icon-search" type="primary" @click="search">Query</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button :loading="loading" icon="el-icon-plus" type="warning" @click="create">新增</el-button>
+          <el-button :loading="loading" icon="el-icon-plus" type="warning" @click="create">New</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button :disabled="multipleSelection.length === 0" :loading="loading" icon="el-icon-delete" type="danger" @click="batchDelete">批量删除</el-button>
+          <el-button :disabled="multipleSelection.length === 0" :loading="loading" icon="el-icon-delete" type="danger" @click="batchDelete">Batch Delete</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button :disabled="multipleSelection.length === 0" :loading="loading" icon="el-icon-upload2" type="success" @click="batchSync">批量同步</el-button>
+          <el-button :disabled="multipleSelection.length === 0" :loading="loading" icon="el-icon-upload2" type="success" @click="batchSync">Batch Synchronization</el-button>
         </el-form-item>
         <br>
         <el-form-item>
-          <el-button :loading="loading" icon="el-icon-download" type="warning" @click="syncOpenLdapUsers">同步原ldap用户信息</el-button>
+          <el-button :loading="loading" icon="el-icon-download" type="warning" @click="syncOpenLdapUsers">Synchronize original ldap user information</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button :loading="loading" icon="el-icon-download" type="warning" @click="syncDingTalkUsers">同步钉钉用户信息</el-button>
+          <el-button :loading="loading" icon="el-icon-download" type="warning" @click="syncDingTalkUsers">Synchronize DingTalk user information</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button :loading="loading" icon="el-icon-download" type="warning" @click="syncFeiShuUsers">同步飞书用户信息</el-button>
+          <el-button :loading="loading" icon="el-icon-download" type="warning" @click="syncFeiShuUsers">Synchronize Feishu user information</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button :loading="loading" icon="el-icon-download" type="warning" @click="syncWeComUsers">同步企业微信用户信息</el-button>
+          <el-button :loading="loading" icon="el-icon-download" type="warning" @click="syncWeComUsers">Synchronize enterprise WeChat user information</el-button>
         </el-form-item>
       </el-form>
 
       <el-table v-loading="loading" :data="tableData" border stripe style="width: 100%" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center" />
-        <el-table-column show-overflow-tooltip sortable prop="username" label="用户名" />
-        <el-table-column show-overflow-tooltip sortable prop="nickname" label="中文名" />
-        <el-table-column show-overflow-tooltip sortable prop="givenName" label="花名" />
-        <!-- 使用按钮方式展示，以后改成布尔参数比较合适 -->
-        <el-table-column label="状态" align="center">
+        <el-table-column show-overflow-tooltip sortable prop="username" label="username" />
+        <el-table-column show-overflow-tooltip sortable prop="nickname" label="nickname" />
+        <el-table-column show-overflow-tooltip sortable prop="givenName" label="givenname" />
+        <!-- Use button to display, and then change it to Boolean parameters is more appropriate -->
+        <el-table-column label="state" align="center">
           <template slot-scope="scope">
             <el-switch v-model="scope.row.status" :active-value="1" :inactive-value="2" @change="userStateChanged(scope.row)" />
           </template>
         </el-table-column>
-        <!-- <el-table-column show-overflow-tooltip sortable prop="status" label="状态" align="center">
+        <!-- <el-table-column show-overflow-tooltip sortable prop="status" label="state" align="center">
           <template slot-scope="scope">
-            <el-tag size="small" :type="scope.row.status === 1 ? 'success':'danger'" disable-transitions>{{ scope.row.status === 1 ? '正常':'禁用' }}</el-tag>
+            <el-tag size="small" :type="scope.row.status === 1 ? 'success':'danger'" disable-transitions>{{ scope.row.status === 1 ? 'Normal':'Disable' }}</el-tag>
           </template>
         </el-table-column> -->
-        <el-table-column show-overflow-tooltip sortable prop="mail" label="邮箱" />
-        <el-table-column show-overflow-tooltip sortable prop="mobile" label="手机号" />
-        <el-table-column show-overflow-tooltip sortable prop="jobNumber" label="工号" />
-        <el-table-column show-overflow-tooltip sortable prop="departments" label="部门" />
-        <el-table-column show-overflow-tooltip sortable prop="position" label="职位" />
-        <el-table-column show-overflow-tooltip sortable prop="creator" label="创建人" />
-        <el-table-column show-overflow-tooltip sortable prop="introduction" label="说明" />
+        <el-table-column show-overflow-tooltip sortable prop="mail" label="Mail" />
+        <el-table-column show-overflow-tooltip sortable prop="mobile" label="Phone number" />
+        <el-table-column show-overflow-tooltip sortable prop="jobNumber" label="Work number" />
+        <el-table-column show-overflow-tooltip sortable prop="departments" label="department" />
+        <el-table-column show-overflow-tooltip sortable prop="position" label="Position" />
+        <el-table-column show-overflow-tooltip sortable prop="creator" label="Created by" />
+        <el-table-column show-overflow-tooltip sortable prop="introduction" label="illustrate" />
         <el-table-column show-overflow-tooltip sortable prop="userDn" label="DN" />
-        <el-table-column show-overflow-tooltip sortable prop="CreatedAt" label="创建时间" />
-        <el-table-column show-overflow-tooltip sortable prop="UpdatedAt" label="更新时间" />
-        <el-table-column fixed="right" label="操作" align="center" width="190">
+        <el-table-column show-overflow-tooltip sortable prop="CreatedAt" label="Creation time" />
+        <el-table-column show-overflow-tooltip sortable prop="UpdatedAt" label="Update time" />
+        <el-table-column fixed="right" label="operate" align="center" width="190">
           <template slot-scope="scope">
-            <el-tooltip content="编辑" effect="dark" placement="top">
+            <el-tooltip content="edit" effect="dark" placement="top">
               <el-button size="mini" icon="el-icon-edit" circle type="primary" @click="update(scope.row)" />
             </el-tooltip>
-            <el-tooltip class="delete-popover" content="重置密码" effect="dark" placement="top">
-              <el-popconfirm title="确定重置该用户密码吗？" @onConfirm="resetUserPassword(scope.row.username)">
+            <el-tooltip class="delete-popover" content="Reset password" effect="dark" placement="top">
+              <el-popconfirm title="Are you sure to reset the user's password?" @onConfirm="resetUserPassword(scope.row.username)">
                 <el-button slot="reference" size="mini" icon="el-icon-key" circle type="warning" />
               </el-popconfirm>
             </el-tooltip>
-            <el-tooltip class="delete-popover" content="删除" effect="dark" placement="top">
-              <el-popconfirm title="确定删除吗？" @onConfirm="singleDelete(scope.row.ID)">
+            <el-tooltip class="delete-popover" content="delete" effect="dark" placement="top">
+              <el-popconfirm title="Are you sure to delete it?" @onConfirm="singleDelete(scope.row.ID)">
                 <el-button slot="reference" size="mini" icon="el-icon-delete" circle type="danger" />
               </el-popconfirm>
             </el-tooltip>
-            <el-tooltip v-if="scope.row.syncState == 2" class="delete-popover" content="同步" effect="dark" placement="top">
-              <el-popconfirm title="确定同步吗？" @onConfirm="singleSync(scope.row.ID)">
+            <el-tooltip v-if="scope.row.syncState == 2" class="delete-popover" content="synchronous" effect="dark" placement="top">
+              <el-popconfirm title="Are you sure you have synchronization?" @onConfirm="singleSync(scope.row.ID)">
                 <el-button slot="reference" size="mini" icon="el-icon-upload2" circle type="success" />
               </el-popconfirm>
             </el-tooltip>
@@ -113,37 +113,37 @@
         <el-form ref="dialogForm" size="small" :model="dialogFormData" :rules="dialogFormRules" label-width="80px">
           <el-row>
             <el-col :span="12">
-              <el-form-item label="用户名" prop="username">
-                <el-input ref="password" v-model.trim="dialogFormData.username" :disabled="disabled" placeholder="用户名（拼音）" />
+              <el-form-item label="username" prop="username">
+                <el-input ref="password" v-model.trim="dialogFormData.username" :disabled="disabled" placeholder="Username" />
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="中文名字" prop="nickname">
-                <el-input v-model.trim="dialogFormData.nickname" placeholder="中文名字" />
+              <el-form-item label="Nickname" prop="nickname">
+                <el-input v-model.trim="dialogFormData.nickname" placeholder="Nickname" />
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="花名" prop="givenName">
-                <el-input v-model.trim="dialogFormData.givenName" placeholder="花名" />
+              <el-form-item label="Givenname" prop="givenName">
+                <el-input v-model.trim="dialogFormData.givenName" placeholder="Givinname" />
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="邮箱" prop="mail">
-                <el-input v-model.trim="dialogFormData.mail" placeholder="邮箱" />
+              <el-form-item label="Mail" prop="mail">
+                <el-input v-model.trim="dialogFormData.mail" placeholder="Mail" />
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <!-- 修改用户时，不显示密码字段 -->
-              <el-form-item v-if="dialogType === 'create'" :label="dialogType === 'create' ? '新密码':'重置密码'" prop="password">
-                <el-input v-model.trim="dialogFormData.password" autocomplete="off" :type="passwordType" :placeholder="dialogType === 'create' ? '新密码':'重置密码'" />
+              <!-- Password field is not displayed when modifying the user-->
+              <el-form-item v-if="dialogType === 'create'" :label="dialogType === 'create' ? 'New Password': 'Reset Password'" prop="password">
+                <el-input v-model.trim="dialogFormData.password" autocomplete="off" :type="passwordType" :placeholder="dialogType === 'create' ? 'New Password': 'Reset Password'" />
                 <span class="show-pwd" @click="showPwd">
                   <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
                 </span>
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="角色" prop="roleIds">
-                <el-select v-model.trim="dialogFormData.roleIds" multiple placeholder="请选择角色" style="width:100%">
+              <el-form-item label="Role" prop="roleIds">
+                <el-select v-model.trim="dialogFormData.roleIds" multiple placeholder="Please select a role" style="width:100%">
                   <el-option
                     v-for="item in roles"
                     :key="item.ID"
@@ -154,65 +154,65 @@
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="状态" prop="status">
-                <el-select v-model.trim="dialogFormData.status" placeholder="请选择状态" style="width:100%">
-                  <el-option label="正常" :value="1" />
-                  <el-option label="禁用" :value="2" />
+              <el-form-item label="state" prop="status">
+                <el-select v-model.trim="dialogFormData.status" placeholder="Please select a status" style="width:100%">
+                  <el-option label="Normal" :value="1" />
+                  <el-option label="Disabled" :value="2" />
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="手机号" prop="mobile">
-                <el-input v-model.trim="dialogFormData.mobile" placeholder="手机号" />
+              <el-form-item label="Phone number" prop="mobile">
+                <el-input v-model.trim="dialogFormData.mobile" placeholder="Phone number" />
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="工号" prop="jobNumber">
-                <el-input v-model.trim="dialogFormData.jobNumber" placeholder="工号" />
+              <el-form-item label="Work number" prop="jobNumber">
+                <el-input v-model.trim="dialogFormData.jobNumber" placeholder="Work number" />
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="职位" prop="position">
-                <el-input v-model.trim="dialogFormData.position" placeholder="职业" />
+              <el-form-item label="Position" prop="position">
+                <el-input v-model.trim="dialogFormData.position" placeholder="Profession" />
               </el-form-item>
             </el-col>
             <el-col :span="24">
-              <el-form-item label="所属部门" prop="departmentId">
+              <el-form-item label="Department" prop="departmentId">
                 <treeselect
                   v-model="dialogFormData.departmentId"
                   :options="departmentsOptions"
-                  placeholder="请选择部门"
+                  placeholder="Please select a department"
                   :normalizer="normalizer"
                   value-consists-of="ALL"
                   :multiple="true"
                   :flat="true"
-                  no-children-text="没有更多选项"
-                  no-results-text="没有匹配的选项"
+                  no-children-text="No more options"
+                  no-results-text="No matching options"
                   @input="treeselectInput"
                 />
               </el-form-item>
             </el-col>
             <el-col :span="24">
-              <el-form-item label="地址" prop="postalAddress">
-                <el-input v-model.trim="dialogFormData.postalAddress" type="textarea" placeholder="地址" :autosize="{minRows: 3, maxRows: 6}" show-word-limit maxlength="100" />
+              <el-form-item label="address" prop="postalAddress">
+                <el-input v-model.trim="dialogFormData.postalAddress" type="textarea" placeholder="address" :autosize="{minRows: 3, maxRows: 6}" show-word-limit maxlength="100" />
               </el-form-item>
             </el-col>
             <el-col :span="24">
-              <el-form-item label="说明" prop="introduction">
-                <el-input v-model.trim="dialogFormData.introduction" type="textarea" placeholder="说明" :autosize="{minRows: 3, maxRows: 6}" show-word-limit maxlength="100" />
+              <el-form-item label="illustrate" prop="introduction">
+                <el-input v-model.trim="dialogFormData.introduction" type="textarea" placeholder="illustrate" :autosize="{minRows: 3, maxRows: 6}" show-word-limit maxlength="100" />
               </el-form-item>
             </el-col>
           </el-row>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button size="mini" @click="cancelForm()">取 消</el-button>
-          <el-button size="mini" :loading="submitLoading" type="primary" @click="submitForm()">确 定</el-button>
+          <el-button size="mini" @click="cancelForm()">Cancel</el-button>
+          <el-button size="mini" :loading="submitLoading" type="primary" @click="submitForm()">OK</el-button>
         </div>
       </el-dialog>
 
-      <!-- 重置密码结果对话框 -->
+      <!-- Reset password result dialog box -->
       <el-dialog
-        title="密码重置成功"
+        title="Password reset successfully"
         :visible.sync="resetPasswordDialogVisible"
         width="400px"
         :close-on-click-modal="false"
@@ -221,14 +221,14 @@
       >
         <div style="text-align: center;">
           <el-alert
-            title="请保存新密码"
+            title="Please save the new password"
             type="warning"
             :closable="false"
             show-icon
             style="margin-bottom: 20px;"
           />
-          <p style="margin-bottom: 10px; font-weight: bold;">用户：{{ resetUsername }}</p>
-          <p style="margin-bottom: 20px; color: #606266;">新密码：</p>
+          <p style="margin-bottom: 10px; font-weight: bold;">user: {{ resetUsername }}</p>
+          <p style="margin-bottom: 20px; color: #606266;">New Password: </p>
           <el-input
             v-model="newPassword"
             readonly
@@ -239,18 +239,18 @@
               icon="el-icon-document-copy"
               @click="copyPassword"
             >
-              复制
+              copy
             </el-button>
           </el-input>
           <el-alert
-            title="请立即保存密码，关闭对话框后将无法再次查看"
+            title="Please save the password immediately. You will not be able to view it again after closing the dialog box."
             type="info"
             :closable="false"
             show-icon
           />
         </div>
         <div slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="closeResetPasswordDialog">我已保存</el-button>
+          <el-button type="primary" @click="closeResetPasswordDialog">I've saved</el-button>
         </div>
       </el-dialog>
 
@@ -274,7 +274,7 @@ export default {
     Treeselect
   },
   props: {
-    disabled: { // username 默认不可编辑，若需要至为可编辑，请（在新增和编辑处）去掉这个值的控制，且配合后端的ldap-user-name-modify配置使用
+    disabled: { // username cannot be edited by default. If it is required to be editable, please remove the control of this value (at the new and editing location) and use it in conjunction with the ldap-user-name-modify configuration of the backend.
       type: Boolean,
       default: false
     }
@@ -282,18 +282,18 @@ export default {
   data() {
     var checkPhone = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('手机号不能为空'))
+        return callback(new Error('Mobile phone number cannot be empty'))
       } else {
         const reg = /1\d{10}/
         if (reg.test(value)) {
           callback()
         } else {
-          return callback(new Error('请输入正确的手机号'))
+          return callback(new Error('Please enter the correct mobile phone number'))
         }
       }
     }
     return {
-      // 查询参数
+      // Query parameters
       params: {
         username: '',
         nickname: '',
@@ -303,23 +303,23 @@ export default {
         pageNum: 1,
         pageSize: 10
       },
-      // 表格数据
+      // Tabular data
       tableData: [],
       total: 0,
       loading: false,
       isUpdate: false,
-      // 部门信息数据
+      // Department information data
       treeselectValue: 0,
-      // 角色
+      // Role
       roles: [],
-      // 部门信息
+      // Department Information
       departmentsOptions: [],
 
       passwordType: 'password',
 
       publicKey: process.env.VUE_APP_PUBLIC_KEY,
 
-      // dialog对话框
+      // dialog dialog box
       submitLoading: false,
       dialogFormTitle: '',
       dialogType: '',
@@ -344,35 +344,35 @@ export default {
       },
       dialogFormRules: {
         username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter your username', trigger: 'blur' },
+          { min: 2, max: 20, message: 'Length between 2 and 20 characters', trigger: 'blur' }
         ],
         password: [
-          { required: false, message: '请输入密码', trigger: 'blur' },
-          { min: 6, max: 30, message: '长度在 6 到 30 个字符', trigger: 'blur' }
+          { required: false, message: 'Please enter your password', trigger: 'blur' },
+          { min: 6, max: 30, message: 'Length from 6 to 30 characters', trigger: 'blur' }
         ],
         mail: [
-          { required: true, message: '请输入邮箱', trigger: 'blur' }
+          { required: true, message: 'Please enter your email address', trigger: 'blur' }
         ],
         jobNumber: [
-          { required: true, message: '请输入工号', trigger: 'blur' },
-          { min: 0, max: 20, message: '长度在 0 到 20 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter the work number', trigger: 'blur' },
+          { min: 0, max: 20, message: 'Length between 0 and 20 characters', trigger: 'blur' }
         ],
         nickname: [
-          { required: true, message: '请输入昵称', trigger: 'blur' },
-          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
+          { required: true, message: 'Please enter a nickname', trigger: 'blur' },
+          { min: 2, max: 20, message: 'Length between 2 and 20 characters', trigger: 'blur' }
         ],
         mobile: [
           { required: true, validator: checkPhone, trigger: 'blur' }
         ],
         status: [
-          { required: true, message: '请选择状态', trigger: 'change' }
+          { required: true, message: 'Please select a status', trigger: 'change' }
         ],
         departmentId: [
-          { required: true, message: '请选择部门', trigger: 'change' },
+          { required: true, message: 'Please select a department', trigger: 'change' },
           { validator: (rule, value, callBack) => {
             if (value < 1) {
-              callBack('请选择有效的部门')
+              callBack('Please select a valid department')
             } else {
               callBack()
             }
@@ -380,21 +380,21 @@ export default {
           }
         ],
         introduction: [
-          { required: false, message: '说明', trigger: 'blur' },
-          { min: 0, max: 100, message: '长度在 0 到 100 个字符', trigger: 'blur' }
+          { required: false, message: 'illustrate', trigger: 'blur' },
+          { min: 0, max: 100, message: 'Length between 0 and 100 characters', trigger: 'blur' }
         ]
       },
 
-      // 删除按钮弹出框
+      // Delete button pop-up box
       popoverVisible: false,
-      // 表格多选
+      // Multiple selection of forms
       multipleSelection: [],
       changeUserStatusFormData: {
         id: '',
         status: ''
       },
 
-      // 重置密码结果对话框
+      // Reset password result dialog box
       resetPasswordDialogVisible: false,
       newPassword: '',
       resetUsername: ''
@@ -405,13 +405,13 @@ export default {
     this.getRoles()
   },
   methods: {
-    // 查询
+    // Query
     search() {
       this.params.pageNum = 1
       this.getTableData()
     },
 
-    // 获取表格数据
+    // Get table data
     async getTableData() {
       this.loading = true
       try {
@@ -430,37 +430,37 @@ export default {
         this.loading = false
       }
     },
-    // 获取所有的分组信息，用于弹框选取上级分组
+    // Get all grouping information, used to select the upper grouping in the pop-up box
     async getAllGroups() {
       this.loading = true
       try {
         const checkParams = {
           pageNum: 1,
-          pageSize: 1000 // 平常百姓人家应该不会有这么多数据吧
+          pageSize: 1000 // Ordinary people probably don't have so much data
         }
         const { data } = await getGroupTree(checkParams)
-        this.departmentsOptions = [{ ID: 0, groupName: '请选择部门信息', groupType: 'T', children: data }]
+        this.departmentsOptions = [{ ID: 0, groupName: 'Please select department information', groupType: 'T', children: data }]
       } finally {
         this.loading = false
       }
     },
-    // 获取角色数据
+    // Get role data
     async getRoles() {
       const res = await getRoles(null)
 
       this.roles = res.data.roles
     },
 
-    // 新增
+    // New
     create() {
-      this.dialogFormTitle = '新增用户'
+      this.dialogFormTitle = 'Add new users'
       this.dialogType = 'create'
       this.disabled = false
       this.getAllGroups()
       this.dialogFormVisible = true
     },
 
-    // 修改
+    // Revise
     update(row) {
       this.disabled = true
       this.getAllGroups()
@@ -471,10 +471,10 @@ export default {
       this.dialogFormData.status = row.status
       this.dialogFormData.mobile = row.mobile
       this.dialogFormData.introduction = row.introduction
-      // 遍历角色数组，获取角色ID
+      // Iterate through the role array and get the role ID
       this.dialogFormData.roleIds = row.roles.map(item => item.ID)
 
-      this.dialogFormTitle = '修改用户'
+      this.dialogFormTitle = 'Modify the user'
       this.dialogType = 'update'
       this.passwordType = 'password'
       this.dialogFormVisible = true
@@ -488,12 +488,12 @@ export default {
       this.dialogFormData.position = row.position
     },
 
-    // 将 部门id 转换为 部门name
+    // Convert department id to department name
     setDepartmentNameByDepartmentId() {
       const ids = this.dialogFormData.departmentId
       if (!ids || !ids.length) return
       const departments = []
-      // 深度优先遍函数
+      // Depth priority function
       const dfs = (node, cb) => {
         if (!node) return
         cb(node)
@@ -511,23 +511,23 @@ export default {
       this.dialogFormData.departments = departments.join(',')
     },
 
-    // 判断结果
+    // Judgment result
     judgeResult(res) {
       if (res.code === 0) {
         Message({
           showClose: true,
-          message: '操作成功',
+          message: 'Operation is successful',
           type: 'success'
         })
       }
     },
 
-    // 提交表单
+    // Submit a form
     submitForm() {
       if (this.dialogFormData.nickname === '') {
         Message({
           showClose: true,
-          message: '请填写昵称',
+          message: 'Please fill in your nickname',
           type: 'error'
         })
         return false
@@ -535,7 +535,7 @@ export default {
       if (this.dialogFormData.username === '') {
         Message({
           showClose: true,
-          message: '请填写用户名',
+          message: 'Please fill in the username',
           type: 'error'
         })
         return false
@@ -543,7 +543,7 @@ export default {
       if (this.dialogFormData.mail === '') {
         Message({
           showClose: true,
-          message: '请填写邮箱',
+          message: 'Please fill in your email address',
           type: 'error'
         })
         return false
@@ -551,7 +551,7 @@ export default {
       if (this.dialogFormData.jobNumber === '') {
         Message({
           showClose: true,
-          message: '请填写工号',
+          message: 'Please fill in the work number',
           type: 'error'
         })
         return false
@@ -559,7 +559,7 @@ export default {
       if (this.dialogFormData.mobile === '') {
         Message({
           showClose: true,
-          message: '请填写手机号',
+          message: 'Please fill in your mobile phone number',
           type: 'error'
         })
         return false
@@ -567,7 +567,7 @@ export default {
       if (this.dialogFormData.status === '') {
         Message({
           showClose: true,
-          message: '请填写状态',
+          message: 'Please fill in the status',
           type: 'error'
         })
         return false
@@ -575,7 +575,7 @@ export default {
       if (this.dialogFormData.roleIds === '') {
         Message({
           showClose: true,
-          message: '请选择角色列表',
+          message: 'Please select a list of roles',
           type: 'error'
         })
         return false
@@ -583,15 +583,15 @@ export default {
       this.$refs['dialogForm'].validate(async valid => {
         if (valid) {
           this.submitLoading = true
-          // 在这里自动填充下部门字段
+          // Automatically fill in department fields here
           this.setDepartmentNameByDepartmentId()
           this.dialogFormDataCopy = { ...this.dialogFormData }
           if (this.dialogFormData.password !== '') {
-          // 密码RSA加密处理
+          // Password RSA encryption processing
             const encryptor = new JSEncrypt()
-            // 设置公钥
+            // Setting up the public key
             encryptor.setPublicKey(this.publicKey)
-            // 加密密码
+            // Encryption password
             const encPassword = encryptor.encrypt(this.dialogFormData.password)
             this.dialogFormDataCopy.password = encPassword
           }
@@ -613,7 +613,7 @@ export default {
         } else {
           Message({
             showClose: true,
-            message: '表单校验失败',
+            message: 'Form verification failed',
             type: 'warn'
           })
           return false
@@ -621,7 +621,7 @@ export default {
       })
     },
 
-    // 提交表单
+    // Submit a form
     cancelForm() {
       this.resetForm()
     },
@@ -644,11 +644,11 @@ export default {
       }
     },
 
-    // 批量删除
+    // Batch Delete
     batchDelete() {
-      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('This operation will be permanently deleted, will it continue?', 'Tip', {
+        confirmButtonText: 'Sure',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(async res => {
         this.loading = true
@@ -668,15 +668,15 @@ export default {
         Message({
           showClose: true,
           type: 'info',
-          message: '已取消删除'
+          message: 'Undelete'
         })
       })
     },
-    // 批量同步
+    // Batch Synchronization
     batchSync() {
-      this.$confirm('此操作批量将数据库的用户同步到Ldap, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('This operation batch synchronizes the database user to Ldap, will it continue?', 'Tip', {
+        confirmButtonText: 'Sure',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(async res => {
         this.loading = true
@@ -696,28 +696,28 @@ export default {
         Message({
           showClose: true,
           type: 'info',
-          message: '已取消同步'
+          message: 'Unsynchronized'
         })
       })
     },
 
-    // 监听 switch 开关 状态改变
+    // Listen to switch state changes
     async userStateChanged(userInfo) {
       this.changeUserStatusFormData.id = userInfo.ID
       this.changeUserStatusFormData.status = userInfo.status
       const { code } = await changeUserStatus(this.changeUserStatusFormData)
       if (code !== 0) {
-        return Message.error('更新用户状态失败')
+        return Message.error('Failed to update user status')
       }
-      Message.success('更新用户状态成功')
+      Message.success('Updated user status successfully')
     },
 
-    // 表格多选
+    // Multiple selection of forms
     handleSelectionChange(val) {
       this.multipleSelection = val
     },
 
-    // 单个删除
+    // Single Delete
     async singleDelete(Id) {
       this.loading = true
       try {
@@ -729,7 +729,7 @@ export default {
       }
       this.getTableData()
     },
-    // 单个同步
+    // Single synchronization
     async singleSync(Id) {
       this.loading = true
       try {
@@ -750,7 +750,7 @@ export default {
       }
     },
 
-    // 分页
+    // Pagination
     handleSizeChange(val) {
       this.params.pageSize = val
       this.getTableData()
@@ -804,7 +804,7 @@ export default {
       })
     },
 
-    // 重置用户密码
+    // Reset user password
     async resetUserPassword(username) {
       this.loading = true
       try {
@@ -815,13 +815,13 @@ export default {
           this.resetPasswordDialogVisible = true
           Message({
             showClose: true,
-            message: '密码重置成功',
+            message: 'Password reset successfully',
             type: 'success'
           })
         } else {
           Message({
             showClose: true,
-            message: res.msg || '密码重置失败',
+            message: res.msg || 'Password reset failed',
             type: 'error'
           })
         }
@@ -831,7 +831,7 @@ export default {
       this.getTableData()
     },
 
-    // 复制密码到剪贴板
+    // Copy password to clipboard
     copyPassword() {
       const textArea = document.createElement('textarea')
       textArea.value = this.newPassword
@@ -841,20 +841,20 @@ export default {
         document.execCommand('copy')
         Message({
           showClose: true,
-          message: '密码已复制到剪贴板',
+          message: 'Password has been copied to clipboard',
           type: 'success'
         })
       } catch (err) {
         Message({
           showClose: true,
-          message: '复制失败，请手动复制',
+          message: 'Copy failed, please copy manually',
           type: 'error'
         })
       }
       document.body.removeChild(textArea)
     },
 
-    // 关闭重置密码对话框
+    // Close the Reset Password dialog box
     closeResetPasswordDialog() {
       this.resetPasswordDialogVisible = false
       this.newPassword = ''

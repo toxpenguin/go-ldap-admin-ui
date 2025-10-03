@@ -27,9 +27,9 @@ module.exports = {
   publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',
-  // lintOnSave: process.env.NODE_ENV === 'development',//这个是设置eslint的代码规范，
+  // lintOnSave: process.env.NODE_ENV === 'development',//This is the code specification for setting eslint.
   productionSourceMap: false,
-  lintOnSave: false,//解决eslint报错的问题
+  lintOnSave: false,// Solve the problem of eslint error
   devServer: {
     port: port,
     open: true,

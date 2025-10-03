@@ -13,7 +13,7 @@
         <el-input
           ref="username"
           v-model="loginForm.username"
-          placeholder="用户名"
+          placeholder="username"
           name="username"
           type="text"
           tabindex="1"
@@ -31,7 +31,7 @@
             ref="password"
             v-model="loginForm.password"
             :type="passwordType"
-            placeholder="密码"
+            placeholder="password"
             name="password"
             tabindex="2"
             autocomplete="on"
@@ -45,10 +45,10 @@
         </el-form-item>
       </el-tooltip>
       <div class="footer-btn">
-        <div class="btn-pass" @click="changePass">忘记密码</div>
-        <!-- <router-link :to="{path:'/changePass'}" class='btn-pass'>忘记密码</router-link> -->
-        <!-- <el-button :loading="loading" type="primary" class="login-btn" @click.native.prevent="delLogin">忘记密码</el-button> -->
-        <el-button :loading="loading" type="primary" class="login-btn" @click.native.prevent="handleLogin">登录</el-button>
+        <div class="btn-pass" @click="changePass">forget the password</div>
+        <!-- <router-link :to="{path:'/changePass'}" class='btn-pass'>forget the password</router-link> -->
+        <!-- <el-button :loading="loading" type="primary" class="login-btn" @click.native.prevent="delLogin">forget the password</el-button> -->
+        <el-button :loading="loading" type="primary" class="login-btn" @click.native.prevent="handleLogin">Log in</el-button>
       </div>
 
     </el-form>
@@ -131,11 +131,11 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          // 密码RSA加密处理
+          // Password RSA encryption processing
           const encryptor = new JSEncrypt()
-          // 设置公钥
+          // Setting up the public key
           encryptor.setPublicKey(this.publicKey)
-          // 加密密码
+          // Encryption password
           const encPassword = encryptor.encrypt(this.loginForm.password)
           const encLoginForm = { username: this.loginForm.username, password: encPassword }
           this.$store.dispatch('user/login', encLoginForm)
@@ -168,7 +168,7 @@ export default {
 </script>
 
 <style lang="scss">
-/* 修复input 背景不协调 和光标变色 */
+/* Fix input background incongruity and cursor discoloration */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
 $bg:#5c646d;

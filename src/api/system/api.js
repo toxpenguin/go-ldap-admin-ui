@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 获取接口列表（已完成）
+// Get the interface list (completed)
 export function getApis(params) {
   return request({
     url: '/api/api/list',
@@ -9,7 +9,7 @@ export function getApis(params) {
   })
 }
 
-// 获取接口树(按接口Category字段分类)（已完成）
+// Get the interface tree (categorized by interface Category field) (completed）
 export function getApiTree(params) {
   return request({
     url: '/api/api/tree',
@@ -18,7 +18,7 @@ export function getApiTree(params) {
   })
 }
 
-// 创建接口（已完成）
+// Create an interface (completed)
 export function createApi(data) {
   return request({
     url: '/api/api/add',
@@ -27,7 +27,7 @@ export function createApi(data) {
   })
 }
 
-// 更新接口（已完成）
+// Update interface (completed)
 export function updateApiById(data) {
   return request({
     url: '/api/api/update',
@@ -36,7 +36,7 @@ export function updateApiById(data) {
   })
 }
 
-// 批量删除接口（已完成）
+// Batch deletion interface (completed)
 export function batchDeleteApiByIds(data) {
   return request({
     url: '/api/api/delete',

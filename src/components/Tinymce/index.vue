@@ -152,7 +152,7 @@ export default {
         // https://www.tiny.cloud/docs-3x/reference/configuration/Configuration3x@convert_urls/
         // https://stackoverflow.com/questions/5196205/disable-tinymce-absolute-to-relative-url-conversions
         convert_urls: false
-        // 整合七牛上传
+        // Integrated Qiniu upload
         // images_dataimg_filter(img) {
         //   setTimeout(() => {
         //     const $image = $(img);
@@ -181,7 +181,7 @@ export default {
         //       progress(100);
         //     })
         //   }).catch(err => {
-        //     failure('出现未知问题，刷新页面，或者联系程序员')
+        //     failure('Unknown problems occur, refresh the page, or contact the programmer')
         //     console.log(err);
         //   });
         // },

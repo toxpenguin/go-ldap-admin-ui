@@ -1,17 +1,17 @@
 <template>
   <div class="reset-pass">
     <el-form ref="form" :model="form" size="medium" class="form-container">
-      <el-form-item label="邮箱">
+      <el-form-item label="Mail">
         <div class="input-container">
-          <el-input v-model="form.mail" placeholder="请输入个人邮箱"></el-input>
-          <el-button type="primary" @click="sendEmailCode">发送验证码</el-button>
+          <el-input v-model="form.mail" placeholder="Please enter your personal email address"></el-input>
+          <el-button type="primary" @click="sendEmailCode">Send verification code</el-button>
         </div>
       </el-form-item>
-      <el-form-item label="验证码" class="code-item">
-        <el-input v-model="form.code" placeholder="请输入验证码"></el-input>
+      <el-form-item label="Verification code" class="code-item">
+        <el-input v-model="form.code" placeholder="Please enter the verification code"></el-input>
       </el-form-item>
       <el-form-item class="reset-item">
-        <el-button type="primary" @click="resetPass">重置密码</el-button>
+        <el-button type="primary" @click="resetPass">Reset password</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -25,7 +25,7 @@ export default {
   name: 'ChangePass',
   data() {
     return {
-      // 查询参数
+      // Query parameters
       form: {
         mail: "",
         code: ""
@@ -33,7 +33,7 @@ export default {
     }
   },
   methods: {
-    // 判断结果
+    // Judgment result
     judgeResult(res){
       if (res.code==0){
           Message({
@@ -44,7 +44,7 @@ export default {
         }
     },
 
-    // 发送邮箱验证码
+    // Send email verification code
     async sendEmailCode() {
       console.log('aaaaaaaa',this.form.mail);
 
@@ -52,12 +52,12 @@ export default {
         this.judgeResult(res)
       })
     },
-    // 重置密码
+    // Reset password
     async resetPass() {
       await emailPass(this.form).then(res =>{
         this.judgeResult(res)
       })
-      // 重新登录
+      // Log in again
       setTimeout(() => {
         this.$router.replace({ path: '/login' })
       }, 1500)

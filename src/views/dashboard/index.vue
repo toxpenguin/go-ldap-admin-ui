@@ -75,8 +75,8 @@ export default {
       lineChartData: lineChartData.newVisitis
     }
   },
-  //普通用户登录后跳转到个人中心
- beforeRouteEnter(to, from, next) {
+  // Regular users log in and jump to personal center
+  beforeRouteEnter(to, from, next) {
     next(vm => {
       const roles = vm.$store.getters.roles;
       if (roles.length > 0 && roles.includes('普通用户')) {
@@ -85,7 +85,7 @@ export default {
     });
   },
 
-   methods: {
+  methods: {
     handleSetLineChartData(type) {
       this.lineChartData = lineChartData[type]
     }

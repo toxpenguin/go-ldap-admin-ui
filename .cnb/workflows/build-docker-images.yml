@@ -1,3 +1,4 @@
+---
 main:
   push:
     - runner:
@@ -6,7 +7,7 @@ main:
         - docker
         - git-clone-yyds
       stages:
-        - name: 构建缓存镜像
+        - name: Build a cache image
           type: docker:cache
           options:
             dockerfile: .cache.dockerfile
@@ -17,14 +18,14 @@ main:
               - package.json
           exports:
             name: DOCKER_CACHE_IMAGE_NAME
-        - name: 直接使用缓存镜像环境安装依赖并编译
+        - name: Install dependencies and compile directly using cached mirror environment
           image: $DOCKER_CACHE_IMAGE_NAME
           script: |
             ln -snf $NODE_PATH node_modules
             time npm install
             sed -i 's@http://localhost:8888/@/@g' .env.production
             time yarn build:prod
-        - name: 🐋 推送镜像
+        - name: 🐋 Push mirror
           script: |
             docker run -d --name buildkitd \
               --security-opt seccomp=unconfined \

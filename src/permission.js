@@ -8,8 +8,8 @@ import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist 没有重定向白名单
-// 路由守卫
+const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist No redirected whitelist
+// Router Guard
 router.beforeEach(async(to, from, next) => {
   // start progress bar
   NProgress.start()
@@ -17,12 +17,12 @@ router.beforeEach(async(to, from, next) => {
   // set page title
   document.title = getPageTitle(to.meta.title)
 
-  // determine whether the user has logged in 确定用户是否已经登录
+  // determine whether the user has logged in Determine if the user is already logged in
   const hasToken = getToken()
 
   if (hasToken) {
     if (to.path === '/login') {
-      // if is logged in, redirect to the home page 如果已登录，请重定向到主页
+      // if is logged in, redirect to the home page If logged in, please redirect to the home page
       next({ path: '/' })
       NProgress.done() // hack: https://github.com/PanJiaChen/vue-element-admin/pull/2939
     } else {
@@ -38,10 +38,10 @@ router.beforeEach(async(to, from, next) => {
           const { ID, roles } = userInfo
           const userinfoForRoutes = { id: ID, roles: roles }
 
-          // 检查是否为管理员（角色ID为1）
+          // Check if it is an administrator (role ID is 1)
           const isAdmin = userInfo.roles && userInfo.roles.some(role => role.ID === 1)
 
-          // 如果是普通用户且要访问的不是个人主页，则重定向到个人主页
+          // If you are an ordinary user and you want to visit not your personal homepage, then redirect to your personal homepage
           if (!isAdmin && to.path !== '/profile/index') {
             next('/profile/index')
             return
@@ -71,7 +71,7 @@ router.beforeEach(async(to, from, next) => {
     /* has no token*/
 
     if (whiteList.indexOf(to.path) !== -1) {
-      // 在免费登录白名单，直接去
+      // On the free login whitelist, go directly
       next()
     } else if (to.path === '/changePass') {
       next({ replace: true })
