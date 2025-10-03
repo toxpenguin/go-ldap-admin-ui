@@ -26,7 +26,7 @@
         </el-table-column>
         <el-table-column show-overflow-tooltip prop="hidden" label="hide" align="center" width="80">
           <template slot-scope="scope">
-            <el-tag size="small" :type="scope.row.hidden === 1 ? 'danger':'success'">{{ scope.row.hidden === 1 ? 'whether' }}</el-tag>
+            <el-tag size="small" :type="scope.row.hidden === 1 ? 'danger':'success'">{{ scope.row.hidden === 1 ? 'Yes':'No' }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column show-overflow-tooltip prop="noCache" label="cache" align="center" width="80">
@@ -41,7 +41,7 @@
               <el-button size="mini" icon="el-icon-edit" circle type="primary" @click="update(scope.row)" />
             </el-tooltip>
             <el-tooltip class="delete-popover" fixed content="delete" effect="dark" placement="top">
-              <el-popconfirm title="Are you sure to delete it? " @onConfirm="singleDelete(scope.row.ID)">
+              <el-popconfirm title="Are you sure to delete it?" @onConfirm="singleDelete(scope.row.ID)">
                 <el-button slot="reference" size="mini" icon="el-icon-delete" circle type="danger" />
               </el-popconfirm>
             </el-tooltip>
@@ -248,9 +248,9 @@ export default {
       this.dialogFormData.component = row.component
       this.dialogFormData.redirect = row.redirect
       this.dialogFormData.sort = row.sort
-      this.dialogFormData.status = row.status === 1 ? 'No' : 'Yes'
-      this.dialogFormData.hidden = row.hidden === 1 ? 'Yes' : 'No'
-      this.dialogFormData.noCache = row.noCache === 1 ? 'No' : 'Yes'
+      this.dialogFormData.status = row.status === 1 ? 'no' : 'yes'
+      this.dialogFormData.hidden = row.hidden === 1 ? 'yes' : 'no'
+      this.dialogFormData.noCache = row.noCache === 1 ? 'no' : 'yes'
       // this.dialogFormData.activeMenu = row.activeMenu
       this.dialogFormData.parentId = row.parentId
 
@@ -278,7 +278,7 @@ export default {
           if (this.dialogFormData.ID === this.dialogFormData.parentId) {
             return Message({
               showClose: true,
-              message: "Can't choose yourself as your superior directory",
+              message: 'Can\'t choose yourself as your superior directory',
               type: 'error'
             })
           }
