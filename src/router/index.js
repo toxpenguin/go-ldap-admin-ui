@@ -64,7 +64,7 @@ export const constantRoutes = [
       path: '/changePass',
       name:'changePass',
       hidden: true,
-      meta: { title: '忘记密码', icon: 'user', noCache: true },
+      meta: { title: 'forget the password', icon: 'user', noCache: true },
       component: () => import('@/views/changePassword/index'),
   },
   {
@@ -87,7 +87,7 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'dashboard', icon: 'dashboard', affix: true }
+        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
       }
       
     ]
@@ -102,7 +102,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/profile/index'),
         name: 'Profile',
-        meta: { title: '个人中心', icon: 'user', noCache: true }
+        meta: { title: 'Personal Center', icon: 'user', noCache: true }
       },
     
     ]
@@ -117,7 +117,7 @@ export const constantRoutes = [
         path: '/userList',
         component: () => import('@/views/groupUser/userList/index'),
         name: 'userList',
-        meta: { title: '分组成员', icon: 'user', noCache: true }
+        meta: { title: 'Group members', icon: 'user', noCache: true }
       }
     ]
   
