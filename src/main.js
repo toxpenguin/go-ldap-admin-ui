@@ -6,7 +6,7 @@ import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 
 import Element from 'element-ui'
 import './styles/element-variables.scss'
-// import enLang from 'element-ui/lib/locale/lang/en'// If you use Chinese language packs, please support them by default. There is no need to introduce them extra. Please delete the dependency
+import enLang from 'element-ui/lib/locale/lang/en' // If you use Chinese language packs, please support them by default. There is no need to introduce them extra. Please delete the dependency
 
 import '@/styles/index.scss' // global css
 
