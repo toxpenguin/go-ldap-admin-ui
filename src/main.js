@@ -21,8 +21,8 @@ import './utils/error-log' // error log
 import * as filters from './filters' // global filters
 
 Vue.use(Element, {
-  size: Cookies.get('size') || 'medium' // set element-ui default size
-  // locale: enLang // If you use Chinese, no settings are required, please delete
+  size: Cookies.get('size') || 'medium', // set element-ui default size
+  locale: enLang // If you use Chinese, no settings are required, please delete
 })
 
 // register global utility filters
